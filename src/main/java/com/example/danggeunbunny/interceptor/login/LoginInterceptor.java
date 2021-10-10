@@ -2,6 +2,7 @@ package com.example.danggeunbunny.interceptor.login;
 
 import com.example.danggeunbunny.annotation.login.LoginRequired;
 import com.example.danggeunbunny.exception.user.UnAuthorizedAccessException;
+import com.example.danggeunbunny.model.user.User;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
@@ -20,8 +21,8 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         HandlerMethod handlerMethod = (HandlerMethod) handler;
-        String memberId = (String) request.getSession().getAttribute(MEMBER_ID);
-        if (handlerMethod.hasMethodAnnotation(LoginRequired.class) && memberId == null) {
+        User user = (User) request.getSession().getAttribute(MEMBER_ID);
+        if (handlerMethod.hasMethodAnnotation(LoginRequired.class) && user == null) {
 
             throw new UnAuthorizedAccessException();
         }
