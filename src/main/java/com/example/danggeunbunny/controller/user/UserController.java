@@ -5,11 +5,13 @@ import com.example.danggeunbunny.model.user.User;
 import com.example.danggeunbunny.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.boot.model.source.internal.hbm.XmlElementMetadata;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import static com.example.danggeunbunny.util.HttpStatusResponseEntity.RESPONSE_CONFLICT;
@@ -21,6 +23,8 @@ import static com.example.danggeunbunny.util.HttpStatusResponseEntity.RESPONSE_O
 @RequestMapping("/api/users")
 public class UserController {
 
+    private static final String MEMBER_ID = "MEMBER_ID";
+    private static final ResponseEntity<HttpStatus> RESPONSE_BAD_REQUEST = ;
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
@@ -45,12 +49,25 @@ public class UserController {
      */
     @GetMapping("/duplicated/{email}")
     public ResponseEntity<HttpStatus> isDuplicatedEmail(@PathVariable String email) {
-        boolean isDuplicated = userService.isDuplicatedEMail(email);
+        boolean isDuplicated = userService.isDuplicatedEmail(email);
 
         if(isDuplicated) {
             return RESPONSE_CONFLICT;
         }
 
         return RESPONSE_OK;
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<HttpStatus> login(@RequestBody @Valid UserDto userDto, HttpSession httpSession) {
+
+        User user = userService.findMemberByEmail(userDto.getEmail());
+
+        if (passwordEncoder.matches(userDto.getPassword(), user.getPassword())) {
+
+            httpSession.setAttribute(MEMBER_ID, user.getId());
+            return RESPONSE_OK;
+        }
+        return RESPONSE_BAD_REQUEST;
     }
 }
