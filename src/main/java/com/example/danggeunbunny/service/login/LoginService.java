@@ -8,6 +8,6 @@ public interface LoginService {
 
     public void logout();
 
-    public User getLoginUser(long id);
+    public User getLoginUser();
 
 }
