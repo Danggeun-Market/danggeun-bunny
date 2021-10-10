@@ -1,6 +1,6 @@
 package com.example.danggeunbunny.controller.user;
 
-import com.example.danggeunbunny.model.user.UserRequest;
+import com.example.danggeunbunny.model.user.User;
 import com.example.danggeunbunny.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,12 +23,12 @@ public class UserController {
 
     /**
      * 사용자 회원가입 경루
-     * @param userRequest
+     * @param user
      * @return
      */
     @PostMapping("/register")
-    public ResponseEntity<HttpStatus> registration(@RequestBody @Valid UserRequest userRequest) {
-        userService.registrationUser(userRequest);
+    public ResponseEntity<HttpStatus> registration(@RequestBody @Valid User user) {
+        userService.registrationUser(user);
 
         return RESPONSE_OK;
     }
