@@ -1,6 +1,7 @@
 package com.example.danggeunbunny.controller.user;
 
 import com.example.danggeunbunny.annotation.login.LoginRequired;
+import com.example.danggeunbunny.dto.profile.ProfileRequestDto;
 import com.example.danggeunbunny.dto.profile.ProfileResponseDto;
 import com.example.danggeunbunny.dto.user.UserDto;
 import com.example.danggeunbunny.model.user.User;
@@ -77,7 +78,7 @@ public class UserController {
         boolean isValidMember = userService.isValidUser(userDto, passwordEncoder);
 
         if (isValidMember) {
-            loginService.login(userService.findUserByEmail(userDto.getEmail()));
+            loginService.login(userService.findUserByEmail(userDto.getEmail()).getId());
 
             return RESPONSE_OK;
         }
@@ -97,6 +98,11 @@ public class UserController {
         return RESPONSE_OK;
     }
 
+    /**
+     * 사용자 프로필 조회 기능
+     * @param id
+     * @return
+     */
     @LoginRequired
     @GetMapping("/profile/{id}")
     private ResponseEntity<ProfileResponseDto> getUserProfile(@PathVariable long id) {
@@ -105,5 +111,17 @@ public class UserController {
 
         return ResponseEntity.ok(ProfileResponseDto.of(user));
     }
+
+    @LoginRequired
+    @PostMapping("/prifile/{id}")
+    public ResponseEntity<ProfileResponseDto> updateUserProfile(@PathVariable long id, @RequestBody ProfileRequestDto profileRequestDto) {
+
+        User user = loginService.getLoginUser(id);
+
+        userService.updateUserProfile(user, profileRequestDto);
+
+        return ResponseEntity.ok(ProfileResponseDto.of(user));
+    }
+
 
 }
