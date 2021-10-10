@@ -1,6 +1,6 @@
 package com.example.danggeunbunny.service.user;
 
-import com.example.danggeunbunny.model.user.UserRequest;
+import com.example.danggeunbunny.model.user.User;
 import com.example.danggeunbunny.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
 
     @Override
-    public void registrationUser(UserRequest userRequest) {
+    public void registrationUser(User userRequest) {
         userRepository.save(userRequest);
 
     }
