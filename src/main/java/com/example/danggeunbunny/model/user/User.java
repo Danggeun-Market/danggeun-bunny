@@ -3,13 +3,12 @@ package com.example.danggeunbunny.model.user;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Getter
 @Table(name = "MEMBER")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User implements Serializable {
+public class User {
 
     @Id
     @GeneratedValue
@@ -27,6 +26,11 @@ public class User implements Serializable {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
+    }
+
+    public void update(String nickname) {
+        this.nickname = nickname;
+
     }
 
 }
