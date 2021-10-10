@@ -26,10 +26,9 @@ public class UserController {
      * @param user
      * @return
      */
-    @PostMapping("/register")
-    public ResponseEntity<HttpStatus> registration(@RequestBody @Valid User user) {
+    @PostMapping
+    private ResponseEntity<HttpStatus> registration(@RequestBody @Valid User user){
         userService.registrationUser(user);
-
         return RESPONSE_OK;
     }
 
