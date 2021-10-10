@@ -100,23 +100,27 @@ public class UserController {
 
     /**
      * 사용자 프로필 조회 기능
-     * @param id
      * @return
      */
     @LoginRequired
-    @GetMapping("/profile/{id}")
-    private ResponseEntity<ProfileResponseDto> getUserProfile(@PathVariable long id) {
+    @GetMapping("/my-profile")
+    private ResponseEntity<ProfileResponseDto> getUserProfile() {
 
-        User user = loginService.getLoginUser(id);
+        User user = loginService.getLoginUser();
 
         return ResponseEntity.ok(ProfileResponseDto.of(user));
     }
 
+    /**
+     * 사용자 정보 업데이트
+     * @param profileRequestDto
+     * @return
+     */
     @LoginRequired
-    @PostMapping("/prifile/{id}")
-    public ResponseEntity<ProfileResponseDto> updateUserProfile(@PathVariable long id, @RequestBody ProfileRequestDto profileRequestDto) {
+    @PostMapping("/my-profile")
+    public ResponseEntity<ProfileResponseDto> updateUserProfile(@RequestBody ProfileRequestDto profileRequestDto) {
 
-        User user = loginService.getLoginUser(id);
+        User user = loginService.getLoginUser();
 
         userService.updateUserProfile(user, profileRequestDto);
 
