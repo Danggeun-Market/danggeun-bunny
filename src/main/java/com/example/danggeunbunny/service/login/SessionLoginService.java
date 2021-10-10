@@ -1,6 +1,7 @@
 package com.example.danggeunbunny.service.login;
 
 import com.example.danggeunbunny.model.user.User;
+import com.example.danggeunbunny.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +12,12 @@ import javax.servlet.http.HttpSession;
 public class SessionLoginService implements LoginService{
 
     private final HttpSession httpSession;
+    private final UserService userService;
     private static final String MEMBER_ID = "MEMBER_ID";
 
     @Override
-    public void login(User user) {
-        httpSession.setAttribute(MEMBER_ID, user);
+    public void login(long id) {
+        httpSession.setAttribute(MEMBER_ID, id);
     }
 
     @Override
@@ -25,6 +27,8 @@ public class SessionLoginService implements LoginService{
 
     @Override
     public User getLoginUser(long id) {
-        return (User) httpSession.getAttribute(MEMBER_ID);
+        Long memberId = (Long) httpSession.getAttribute(MEMBER_ID);
+
+        return userService.findUserByEmail(memberId);
     }
 }
