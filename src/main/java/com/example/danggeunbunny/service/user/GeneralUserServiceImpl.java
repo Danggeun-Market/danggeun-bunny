@@ -4,6 +4,7 @@ import com.example.danggeunbunny.dto.user.UserDto;
 import com.example.danggeunbunny.exception.user.UserNotFoundException;
 import com.example.danggeunbunny.model.user.User;
 import com.example.danggeunbunny.repository.user.UserRepository;
+import com.example.danggeunbunny.service.login.LoginService;
 import com.example.danggeunbunny.service.login.SessionLoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,6 +17,7 @@ public class GeneralUserServiceImpl implements UserService{
 
     private final SessionLoginService sessionLoginService;
     private final UserRepository memberRepository;
+    private final LoginService loginService;
 
     @Override
     @Transactional
@@ -39,7 +41,7 @@ public class GeneralUserServiceImpl implements UserService{
         User user = findUserByEmail(userDto.getEmail());
 
         if (passwordEncoder.matches(userDto.getPassword(), user.getPassword())) {
-            sessionLoginService.login(user.getEmail());
+            loginService.login(user.getEmail());
 
             return true;
         }
