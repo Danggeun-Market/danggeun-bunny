@@ -12,8 +12,8 @@ public class GeneralUserServiceImpl implements UserService{
     private final UserRepository userRepository;
 
     @Override
-    public void registrationUser(User userRequest) {
-        userRepository.save(userRequest);
+    public void registrationUser(User user) {
+        userRepository.save(user);
 
     }
 
