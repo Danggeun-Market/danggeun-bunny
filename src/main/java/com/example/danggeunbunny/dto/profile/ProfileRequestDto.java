@@ -12,5 +12,5 @@ public class ProfileRequestDto {
     private final String email;
 
     private final String nickname;
-    
+
 }
