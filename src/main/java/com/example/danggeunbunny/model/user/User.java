@@ -3,13 +3,13 @@ package com.example.danggeunbunny.model.user;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Getter
-@Setter
 @Table(name = "MEMBER")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue
