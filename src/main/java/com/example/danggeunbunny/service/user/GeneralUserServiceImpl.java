@@ -54,7 +54,7 @@ public class GeneralUserServiceImpl implements UserService{
     @Transactional
     public void updateUserProfile(User user, ProfileRequestDto profileRequestDto) {
 
-        user.update(profileRequestDto.getNickname());
+        user.updateProfile(profileRequestDto.getNickname());
 
     }
 
