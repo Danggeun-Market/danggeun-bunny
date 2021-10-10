@@ -14,5 +14,3 @@ public class HttpStatusResponseEntity {
     public static final ResponseEntity<HttpStatus> RESPONSE_PAYLOAD_TOO_LARGE = ResponseEntity.status(HttpStatus.PAYLOAD_TOO_LARGE).build();
 }
 
-
-}
