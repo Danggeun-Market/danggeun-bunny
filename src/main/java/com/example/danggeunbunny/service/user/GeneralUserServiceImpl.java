@@ -1,6 +1,6 @@
 package com.example.danggeunbunny.service.user;
 
-import com.example.danggeunbunny.exception.user.MemberNotFoundException;
+import com.example.danggeunbunny.exception.user.UserNotFoundException;
 import com.example.danggeunbunny.model.user.User;
 import com.example.danggeunbunny.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +27,7 @@ public class GeneralUserServiceImpl implements UserService{
 
     @Override
     public User findUserByEmail(String email) {
-        return memberRepository.findUserByEmail(email).orElseThrow(MemberNotFoundException::new);
+        return memberRepository.findUserByEmail(email).orElseThrow(UserNotFoundException::new);
     }
 
 }
