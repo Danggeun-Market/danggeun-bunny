@@ -1,2 +1,9 @@
-package com.example.danggeunbunny.service.login;public class LoginService {
+package com.example.danggeunbunny.service.login;
+
+public interface LoginService {
+
+    public void login(String email);
+
+    public void Logout();
+
 }
