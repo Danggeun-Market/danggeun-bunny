@@ -12,7 +12,7 @@ import javax.validation.constraints.Pattern;
 @Getter
 @Setter
 @Table(name = "MEMBER")
-public class UserRequest {
+public class User {
 
     @Id
     @GeneratedValue
