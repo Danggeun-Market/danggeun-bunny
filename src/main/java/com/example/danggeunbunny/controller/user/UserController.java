@@ -26,7 +26,7 @@ public class UserController {
     private final PasswordEncoder passwordEncoder;
 
     /**
-     * 사용자 회원가입 경루
+     * 사용자 회원가입 경로
      * @param userDto
      * @return
      */
@@ -72,5 +72,17 @@ public class UserController {
             return RESPONSE_OK;
         }
         return RESPONSE_BAD_REQUEST;
+    }
+
+    /**
+     * 사용자 로그아웃 기능
+     * @param httpSession
+     * @return
+     */
+    @GetMapping("/logout")
+    public ResponseEntity<HttpStatus> logout(HttpSession httpSession) {
+        httpSession.removeAttribute(MEMBER_ID);
+
+        return RESPONSE_OK;
     }
 }
