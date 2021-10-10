@@ -1,5 +1,8 @@
 package com.example.danggeunbunny.controller.user;
 
+import com.example.danggeunbunny.annotation.login.LoginRequired;
+import com.example.danggeunbunny.dto.profile.ProfileRequestDto;
+import com.example.danggeunbunny.dto.profile.ProfileResponseDto;
 import com.example.danggeunbunny.dto.user.UserDto;
 import com.example.danggeunbunny.model.user.User;
 import com.example.danggeunbunny.service.login.LoginService;
@@ -75,7 +78,7 @@ public class UserController {
         boolean isValidMember = userService.isValidUser(userDto, passwordEncoder);
 
         if (isValidMember) {
-            loginService.login(userDto.getEmail());
+            loginService.login(userService.findUserByEmail(userDto.getEmail()).getId());
 
             return RESPONSE_OK;
         }
@@ -87,12 +90,42 @@ public class UserController {
      * @return
      */
 
-
+    @LoginRequired
     @GetMapping("/logout")
     public ResponseEntity<HttpStatus> logout() {
         loginService.logout();
 
         return RESPONSE_OK;
     }
+
+    /**
+     * 사용자 프로필 조회 기능
+     * @return
+     */
+    @LoginRequired
+    @GetMapping("/my-profile")
+    private ResponseEntity<ProfileResponseDto> getUserProfile() {
+
+        User user = loginService.getLoginUser();
+
+        return ResponseEntity.ok(ProfileResponseDto.of(user));
+    }
+
+    /**
+     * 사용자 정보 업데이트
+     * @param profileRequestDto
+     * @return
+     */
+    @LoginRequired
+    @PostMapping("/my-profile")
+    public ResponseEntity<ProfileResponseDto> updateUserProfile(@RequestBody ProfileRequestDto profileRequestDto) {
+
+        User user = loginService.getLoginUser();
+
+        userService.updateUserProfile(user, profileRequestDto);
+
+        return ResponseEntity.ok(ProfileResponseDto.of(user));
+    }
+
 
 }

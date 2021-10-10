@@ -1,5 +1,7 @@
 package com.example.danggeunbunny.service.user;
 
+import com.example.danggeunbunny.dto.profile.PasswordRequestDto;
+import com.example.danggeunbunny.dto.profile.ProfileRequestDto;
 import com.example.danggeunbunny.dto.user.UserDto;
 import com.example.danggeunbunny.exception.user.UserNotFoundException;
 import com.example.danggeunbunny.model.user.User;
@@ -13,22 +15,27 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class GeneralUserServiceImpl implements UserService{
 
-    private final UserRepository memberRepository;
+    private final UserRepository userRepository;
 
     @Override
     @Transactional
     public void registrationUser(User user) {
-        memberRepository.save(user);
+        userRepository.save(user);
     }
 
     @Override
     public boolean isDuplicatedEmail(String email) {
-        return memberRepository.existsByEmail(email);
+        return userRepository.existsByEmail(email);
     }
 
     @Override
     public User findUserByEmail(String email) {
-        return memberRepository.findUserByEmail(email).orElseThrow(UserNotFoundException::new);
+        return userRepository.findUserByEmail(email).orElseThrow(UserNotFoundException::new);
+    }
+
+    @Override
+    public User findUserById(long id) {
+        return userRepository.findUserById(id).orElseThrow(UserNotFoundException::new);
     }
 
     @Override
@@ -43,5 +50,29 @@ public class GeneralUserServiceImpl implements UserService{
 
         return false;
     }
+
+    @Override
+    public boolean isValidPassword(User user, PasswordRequestDto passwordRequestDto, PasswordEncoder passwordEncoder) {
+
+        if(passwordEncoder.matches(passwordRequestDto.getOldPassword(), user.getPassword())) {
+            return true;
+        }
+
+        return false;    }
+
+    @Override
+    @Transactional
+    public void updateUserProfile(User user, ProfileRequestDto profileRequestDto) {
+
+        user.updateProfile(profileRequestDto.getNickname());
+
+    }
+
+    @Override
+    public void updateUserPassword(User user, PasswordRequestDto passwordRequestDto, PasswordEncoder passwordEncoder) {
+
+        user.updatePassword(passwordEncoder.encode(passwordRequestDto.getNewPassword()));
+    }
+
 
 }

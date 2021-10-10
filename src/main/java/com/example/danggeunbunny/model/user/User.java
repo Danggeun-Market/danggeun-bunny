@@ -6,7 +6,6 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@Setter
 @Table(name = "MEMBER")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
@@ -27,6 +26,15 @@ public class User {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
+    }
+
+    public void updateProfile(String nickname) {
+        this.nickname = nickname;
+
+    }
+
+    public void updatePassword(String password) {
+        this.password = password;
     }
 
 }
