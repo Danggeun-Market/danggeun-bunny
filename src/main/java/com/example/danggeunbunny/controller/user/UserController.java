@@ -1,6 +1,7 @@
 package com.example.danggeunbunny.controller.user;
 
 import com.example.danggeunbunny.annotation.login.LoginRequired;
+import com.example.danggeunbunny.dto.profile.PasswordRequestDto;
 import com.example.danggeunbunny.dto.profile.ProfileRequestDto;
 import com.example.danggeunbunny.dto.profile.ProfileResponseDto;
 import com.example.danggeunbunny.dto.user.UserDto;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -125,6 +127,24 @@ public class UserController {
         userService.updateUserProfile(user, profileRequestDto);
 
         return ResponseEntity.ok(ProfileResponseDto.of(user));
+    }
+
+    /**
+     * 사용자 비밀번호 변경 기능
+     * @param passwordRequestDto
+     * @return
+     */
+    @LoginRequired
+    @PutMapping("/password")
+    private ResponseEntity<HttpStatus> changePassword(@Valid @RequestBody PasswordRequestDto passwordRequestDto) {
+
+        User user = loginService.getLoginUser();
+
+        if (userService.isValidPassword(user, passwordRequestDto, passwordEncoder)) {
+            userService.updateUserPassword(user, passwordRequestDto, passwordEncoder);
+        }
+
+        return RESPONSE_OK;
     }
 
 
