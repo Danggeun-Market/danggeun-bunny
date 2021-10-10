@@ -4,6 +4,6 @@ public interface LoginService {
 
     public void login(String email);
 
-    public void Logout();
+    public void logout();
 
 }
