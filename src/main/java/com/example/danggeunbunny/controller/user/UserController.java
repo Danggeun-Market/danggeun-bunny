@@ -55,6 +55,12 @@ public class UserController {
         return RESPONSE_OK;
     }
 
+    /**
+     * 사용자 로그인
+     * @param userDto
+     * @param httpSession
+     * @return
+     */
     @PostMapping("/login")
     public ResponseEntity<HttpStatus> login(@RequestBody @Valid UserDto userDto, HttpSession httpSession) {
 
