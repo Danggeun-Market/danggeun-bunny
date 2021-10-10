@@ -5,7 +5,6 @@ import com.example.danggeunbunny.model.user.User;
 import com.example.danggeunbunny.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.boot.model.source.internal.hbm.XmlElementMetadata;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,8 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import static com.example.danggeunbunny.util.HttpStatusResponseEntity.RESPONSE_CONFLICT;
-import static com.example.danggeunbunny.util.HttpStatusResponseEntity.RESPONSE_OK;
+import static com.example.danggeunbunny.util.HttpStatusResponseEntity.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,7 +22,6 @@ import static com.example.danggeunbunny.util.HttpStatusResponseEntity.RESPONSE_O
 public class UserController {
 
     private static final String MEMBER_ID = "MEMBER_ID";
-    private static final ResponseEntity<HttpStatus> RESPONSE_BAD_REQUEST = ;
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
@@ -61,7 +58,7 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<HttpStatus> login(@RequestBody @Valid UserDto userDto, HttpSession httpSession) {
 
-        User user = userService.findMemberByEmail(userDto.getEmail());
+        User user = userService.findUserByEmail(userDto.getEmail());
 
         if (passwordEncoder.matches(userDto.getPassword(), user.getPassword())) {
 
