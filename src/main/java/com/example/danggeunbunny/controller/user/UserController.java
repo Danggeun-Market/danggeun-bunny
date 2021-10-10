@@ -1,6 +1,7 @@
 package com.example.danggeunbunny.controller.user;
 
 import com.example.danggeunbunny.annotation.login.LoginRequired;
+import com.example.danggeunbunny.dto.profile.ProfileResponseDto;
 import com.example.danggeunbunny.dto.user.UserDto;
 import com.example.danggeunbunny.model.user.User;
 import com.example.danggeunbunny.service.login.LoginService;
@@ -76,7 +77,7 @@ public class UserController {
         boolean isValidMember = userService.isValidUser(userDto, passwordEncoder);
 
         if (isValidMember) {
-            loginService.login(userDto.getEmail());
+            loginService.login(userService.findUserByEmail(userDto.getEmail()));
 
             return RESPONSE_OK;
         }
@@ -94,6 +95,15 @@ public class UserController {
         loginService.logout();
 
         return RESPONSE_OK;
+    }
+
+    @LoginRequired
+    @GetMapping("/profile/{id}")
+    private ResponseEntity<ProfileResponseDto> getUserProfile(@PathVariable long id) {
+
+        User user = loginService.getLoginUser(id);
+
+        return ResponseEntity.ok(ProfileResponseDto.of(user));
     }
 
 }
