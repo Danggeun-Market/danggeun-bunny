@@ -1,6 +1,8 @@
 package com.example.danggeunbunny.service.user;
 
+import com.example.danggeunbunny.dto.user.UserDto;
 import com.example.danggeunbunny.model.user.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -8,7 +10,11 @@ public interface UserService {
 
     public void registrationUser(User userRequest);
 
-    public boolean isDuplicatedEMail(String email);
+    public boolean isDuplicatedEmail(String email);
+
+    public User findUserByEmail(String email);
+
+    public boolean isValidUser(UserDto memberDto, PasswordEncoder passwordEncoder);
 
 
 }

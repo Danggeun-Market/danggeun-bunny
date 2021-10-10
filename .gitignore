@@ -39,3 +39,5 @@ out/
 build
 .gradle
 gradle
+
+resources
