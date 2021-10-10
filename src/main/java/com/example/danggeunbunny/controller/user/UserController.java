@@ -75,6 +75,7 @@ public class UserController {
         boolean isValidMember = userService.isValidUser(userDto, passwordEncoder);
 
         if (isValidMember) {
+            loginService.login(userDto.getEmail());
 
             return RESPONSE_OK;
         }
