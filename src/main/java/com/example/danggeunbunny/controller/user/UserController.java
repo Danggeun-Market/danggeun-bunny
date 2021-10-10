@@ -1,5 +1,6 @@
 package com.example.danggeunbunny.controller.user;
 
+import com.example.danggeunbunny.annotation.login.LoginRequired;
 import com.example.danggeunbunny.dto.user.UserDto;
 import com.example.danggeunbunny.model.user.User;
 import com.example.danggeunbunny.service.login.LoginService;
@@ -87,7 +88,7 @@ public class UserController {
      * @return
      */
 
-
+    @LoginRequired
     @GetMapping("/logout")
     public ResponseEntity<HttpStatus> logout() {
         loginService.logout();
