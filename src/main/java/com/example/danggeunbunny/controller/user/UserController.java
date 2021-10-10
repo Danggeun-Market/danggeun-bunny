@@ -2,6 +2,7 @@ package com.example.danggeunbunny.controller.user;
 
 import com.example.danggeunbunny.dto.user.UserDto;
 import com.example.danggeunbunny.model.user.User;
+import com.example.danggeunbunny.service.login.LoginService;
 import com.example.danggeunbunny.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,9 +22,9 @@ import static com.example.danggeunbunny.util.HttpStatusResponseEntity.*;
 @RequestMapping("/api/users")
 public class UserController {
 
-    private static final String MEMBER_ID = "MEMBER_ID";
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
+    private final LoginService loginService;
 
     /**
      * 사용자 회원가입 경로
@@ -32,6 +33,14 @@ public class UserController {
      */
     @PostMapping
     private ResponseEntity<HttpStatus> registration(@RequestBody @Valid UserDto userDto){
+
+        // 클라이언트에서 사용자 이메일 중복체크를 수행하지만 API요청에 의한 예외상황에 대비하여 더블체크
+        boolean isDuplicated = userService.isDuplicatedEmail(userDto.getEmail());
+
+        if(isDuplicated) {
+            return RESPONSE_CONFLICT;
+        }
+
 
         User user = UserDto.toEntity(userDto, passwordEncoder);
         userService.registrationUser(user);
@@ -58,17 +67,15 @@ public class UserController {
     /**
      * 사용자 로그인
      * @param userDto
-     * @param httpSession
      * @return
      */
     @PostMapping("/login")
-    public ResponseEntity<HttpStatus> login(@RequestBody @Valid UserDto userDto, HttpSession httpSession) {
+    public ResponseEntity<HttpStatus> login(@RequestBody @Valid UserDto userDto) {
 
-        User user = userService.findUserByEmail(userDto.getEmail());
+        boolean isValidMember = userService.isValidUser(userDto, passwordEncoder);
 
-        if (passwordEncoder.matches(userDto.getPassword(), user.getPassword())) {
+        if (isValidMember) {
 
-            httpSession.setAttribute(MEMBER_ID, user.getId());
             return RESPONSE_OK;
         }
         return RESPONSE_BAD_REQUEST;
@@ -76,13 +83,15 @@ public class UserController {
 
     /**
      * 사용자 로그아웃 기능
-     * @param httpSession
      * @return
      */
+
+
     @GetMapping("/logout")
-    public ResponseEntity<HttpStatus> logout(HttpSession httpSession) {
-        httpSession.removeAttribute(MEMBER_ID);
+    public ResponseEntity<HttpStatus> logout() {
+        loginService.logout();
 
         return RESPONSE_OK;
     }
+
 }
