@@ -36,6 +36,8 @@ dependencies {
     testImplementation group: 'com.h2database', name: 'h2', version: '1.4.200'
 
     implementation group: 'org.springframework.security', name: 'spring-security-core', version: '5.5.2'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis', version: '2.5.5'
+    implementation group: 'org.springframework.session', name: 'spring-session-data-redis', version: '2.5.1'
 
 }
 
