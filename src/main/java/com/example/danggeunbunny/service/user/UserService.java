@@ -1,5 +1,6 @@
 package com.example.danggeunbunny.service.user;
 
+import com.example.danggeunbunny.dto.profile.PasswordRequestDto;
 import com.example.danggeunbunny.dto.profile.ProfileRequestDto;
 import com.example.danggeunbunny.dto.user.UserDto;
 import com.example.danggeunbunny.model.user.User;
@@ -19,7 +20,10 @@ public interface UserService {
 
     public boolean isValidUser(UserDto memberDto, PasswordEncoder passwordEncoder);
 
-    public void updateUserProfile(User user, ProfileRequestDto profileRequest);
+    public boolean isValidPassword(User user, PasswordRequestDto passwordRequestDto, PasswordEncoder passwordEncoder);
 
+    public void updateUserProfile(User user, ProfileRequestDto profileRequestDto);
+
+    public void updateUserPassword(User user, PasswordRequestDto passwordRequestDto, PasswordEncoder passwordEncoder);
 
 }
