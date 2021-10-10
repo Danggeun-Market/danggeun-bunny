@@ -1,6 +1,7 @@
 package com.example.danggeunbunny.controller.user;
 
 import com.example.danggeunbunny.annotation.login.LoginRequired;
+import com.example.danggeunbunny.annotation.login.LoginUser;
 import com.example.danggeunbunny.dto.profile.PasswordRequestDto;
 import com.example.danggeunbunny.dto.profile.ProfileRequestDto;
 import com.example.danggeunbunny.dto.profile.ProfileResponseDto;
@@ -106,9 +107,7 @@ public class UserController {
      */
     @LoginRequired
     @GetMapping("/my-profile")
-    private ResponseEntity<ProfileResponseDto> getUserProfile() {
-
-        User user = loginService.getLoginUser();
+    private ResponseEntity<ProfileResponseDto> getUserProfile(@LoginUser User user) {
 
         return ResponseEntity.ok(ProfileResponseDto.of(user));
     }
@@ -120,9 +119,8 @@ public class UserController {
      */
     @LoginRequired
     @PostMapping("/my-profile")
-    public ResponseEntity<ProfileResponseDto> updateUserProfile(@RequestBody ProfileRequestDto profileRequestDto) {
+    public ResponseEntity<ProfileResponseDto> updateUserProfile(@LoginUser User user, @RequestBody ProfileRequestDto profileRequestDto) {
 
-        User user = loginService.getLoginUser();
 
         userService.updateUserProfile(user, profileRequestDto);
 
@@ -136,9 +134,7 @@ public class UserController {
      */
     @LoginRequired
     @PutMapping("/password")
-    private ResponseEntity<HttpStatus> changePassword(@Valid @RequestBody PasswordRequestDto passwordRequestDto) {
-
-        User user = loginService.getLoginUser();
+    private ResponseEntity<HttpStatus> changePassword(@LoginUser User user, @Valid @RequestBody PasswordRequestDto passwordRequestDto) {
 
         if (userService.isValidPassword(user, passwordRequestDto, passwordEncoder)) {
             userService.updateUserPassword(user, passwordRequestDto, passwordEncoder);
