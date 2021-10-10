@@ -8,7 +8,8 @@ public interface UserService {
 
     public void registrationUser(User userRequest);
 
-    public boolean isDuplicatedEMail(String email);
+    public boolean isDuplicatedEmail(String email);
 
+    public User findUserByEmail(String email);
 
 }
