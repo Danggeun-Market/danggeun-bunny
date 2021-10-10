@@ -4,7 +4,7 @@ import com.example.danggeunbunny.model.user.User;
 
 public interface LoginService {
 
-    public void login(User user);
+    public void login(long id);
 
     public void logout();
 
