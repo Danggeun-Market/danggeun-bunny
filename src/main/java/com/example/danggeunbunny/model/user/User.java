@@ -28,9 +28,13 @@ public class User {
         this.nickname = nickname;
     }
 
-    public void update(String nickname) {
+    public void updateProfile(String nickname) {
         this.nickname = nickname;
 
+    }
+
+    public void updatePassword(String password) {
+        this.password = password;
     }
 
 }
