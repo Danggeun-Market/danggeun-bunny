@@ -1,2 +1,24 @@
-package com.example.danggeunbunny.service.login;public class SessionLoginService {
+package com.example.danggeunbunny.service.login;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpSession;
+
+@Service
+@RequiredArgsConstructor
+public class SessionLoginService implements LoginService{
+
+    private final HttpSession httpSession;
+    private static final String MEMBER_ID = "MEMBER_ID";
+
+    @Override
+    public void login(String email) {
+        httpSession.setAttribute(MEMBER_ID, email);
+    }
+
+    @Override
+    public void Logout() {
+        httpSession.removeAttribute(MEMBER_ID);
+    }
 }
