@@ -16,4 +16,9 @@ public class UserServiceImpl implements UserService{
         userRepository.save(UserRequest);
 
     }
+
+    @Override
+    public boolean isDuplicatedEMail(String email) {
+        return userRepository.existsByEmail(email);
+    }
 }
