@@ -1,11 +1,13 @@
 package com.example.danggeunbunny.controller.user;
 
+import com.example.danggeunbunny.dto.user.UserDto;
 import com.example.danggeunbunny.model.user.User;
 import com.example.danggeunbunny.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,15 +22,19 @@ import static com.example.danggeunbunny.util.HttpStatusResponseEntity.RESPONSE_O
 public class UserController {
 
     private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
     /**
      * 사용자 회원가입 경루
-     * @param user
+     * @param userDto
      * @return
      */
     @PostMapping
-    private ResponseEntity<HttpStatus> registration(@RequestBody @Valid User user){
+    private ResponseEntity<HttpStatus> registration(@RequestBody @Valid UserDto userDto){
+
+        User user = UserDto.toEntity(userDto, passwordEncoder);
         userService.registrationUser(user);
+
         return RESPONSE_OK;
     }
 
