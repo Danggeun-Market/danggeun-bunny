@@ -47,7 +47,7 @@ public class User {
         this.password = password;
     }
 
-    public void setMemberLocationAddress(LocationRequestDto locationAddress) {
+    public void setUserLocationAddress(LocationRequestDto locationAddress) {
         this.address = locationAddress.toAddress();
         this.location = locationAddress.toLocation();
     }

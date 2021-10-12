@@ -2,6 +2,7 @@ package com.example.danggeunbunny.controller.user;
 
 import com.example.danggeunbunny.annotation.login.LoginRequired;
 import com.example.danggeunbunny.annotation.login.LoginUser;
+import com.example.danggeunbunny.dto.location.LocationRequestDto;
 import com.example.danggeunbunny.dto.profile.PasswordRequestDto;
 import com.example.danggeunbunny.dto.profile.ProfileRequestDto;
 import com.example.danggeunbunny.dto.profile.ProfileResponseDto;
@@ -134,13 +135,20 @@ public class UserController {
      */
     @LoginRequired
     @PutMapping("/password")
-    private ResponseEntity<HttpStatus> changePassword(@LoginUser User user, @Valid @RequestBody PasswordRequestDto passwordRequestDto) {
+    public ResponseEntity<HttpStatus> changePassword(@LoginUser User user, @Valid @RequestBody PasswordRequestDto passwordRequestDto) {
 
         if (userService.isValidPassword(user, passwordRequestDto, passwordEncoder)) {
             userService.updateUserPassword(user, passwordRequestDto, passwordEncoder);
         }
 
         return RESPONSE_OK;
+    }
+
+    @LoginRequired
+    @PutMapping("/my-location")
+    public ResponseEntity<HttpStatus> setUserLocationAddress(@LoginUser User user, @RequestBody LocationRequestDto locationRequestDto) {
+
+
     }
 
 

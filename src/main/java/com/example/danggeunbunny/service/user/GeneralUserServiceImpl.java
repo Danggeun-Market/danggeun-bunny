@@ -1,5 +1,6 @@
 package com.example.danggeunbunny.service.user;
 
+import com.example.danggeunbunny.dto.location.LocationRequestDto;
 import com.example.danggeunbunny.dto.profile.PasswordRequestDto;
 import com.example.danggeunbunny.dto.profile.ProfileRequestDto;
 import com.example.danggeunbunny.dto.user.UserDto;
@@ -72,6 +73,13 @@ public class GeneralUserServiceImpl implements UserService{
     public void updateUserPassword(User user, PasswordRequestDto passwordRequestDto, PasswordEncoder passwordEncoder) {
 
         user.updatePassword(passwordEncoder.encode(passwordRequestDto.getNewPassword()));
+    }
+
+    @Override
+    @Transactional
+    public void setUserLocationAddress(User user, LocationRequestDto locationRequestDto) {
+        user.setUserLocationAddress(locationRequestDto);
+
     }
 
 
