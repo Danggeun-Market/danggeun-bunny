@@ -1,8 +1,5 @@
 package com.example.danggeunbunny.model.user;
 
-import com.example.danggeunbunny.dto.location.LocationRequestDto;
-import com.example.danggeunbunny.model.address.Address;
-import com.example.danggeunbunny.model.address.Location;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,13 +21,6 @@ public class User {
 
     private String nickname;
 
-    @Embedded
-    private Address address;
-
-    @Embedded
-    private Location location;
-
-
     @Builder
     public User(String email, String password, String nickname) {
         this.email = email;
@@ -46,12 +36,5 @@ public class User {
     public void updatePassword(String password) {
         this.password = password;
     }
-
-    public void setMemberLocationAddress(LocationRequestDto locationAddress) {
-        this.address = locationAddress.toAddress();
-        this.location = locationAddress.toLocation();
-    }
-
-
 
 }
