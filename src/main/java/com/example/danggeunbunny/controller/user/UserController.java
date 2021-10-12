@@ -1,6 +1,8 @@
 package com.example.danggeunbunny.controller.user;
 
 import com.example.danggeunbunny.annotation.login.LoginRequired;
+import com.example.danggeunbunny.annotation.login.LoginUser;
+import com.example.danggeunbunny.dto.profile.PasswordRequestDto;
 import com.example.danggeunbunny.dto.profile.ProfileRequestDto;
 import com.example.danggeunbunny.dto.profile.ProfileResponseDto;
 import com.example.danggeunbunny.dto.user.UserDto;
@@ -11,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -104,9 +107,7 @@ public class UserController {
      */
     @LoginRequired
     @GetMapping("/my-profile")
-    private ResponseEntity<ProfileResponseDto> getUserProfile() {
-
-        User user = loginService.getLoginUser();
+    private ResponseEntity<ProfileResponseDto> getUserProfile(@LoginUser User user) {
 
         return ResponseEntity.ok(ProfileResponseDto.of(user));
     }
@@ -118,13 +119,28 @@ public class UserController {
      */
     @LoginRequired
     @PostMapping("/my-profile")
-    public ResponseEntity<ProfileResponseDto> updateUserProfile(@RequestBody ProfileRequestDto profileRequestDto) {
+    public ResponseEntity<ProfileResponseDto> updateUserProfile(@LoginUser User user, @RequestBody ProfileRequestDto profileRequestDto) {
 
-        User user = loginService.getLoginUser();
 
         userService.updateUserProfile(user, profileRequestDto);
 
         return ResponseEntity.ok(ProfileResponseDto.of(user));
+    }
+
+    /**
+     * 사용자 비밀번호 변경 기능
+     * @param passwordRequestDto
+     * @return
+     */
+    @LoginRequired
+    @PutMapping("/password")
+    private ResponseEntity<HttpStatus> changePassword(@LoginUser User user, @Valid @RequestBody PasswordRequestDto passwordRequestDto) {
+
+        if (userService.isValidPassword(user, passwordRequestDto, passwordEncoder)) {
+            userService.updateUserPassword(user, passwordRequestDto, passwordEncoder);
+        }
+
+        return RESPONSE_OK;
     }
 
 
