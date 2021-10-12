@@ -14,10 +14,9 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Address {
 
-    private String depth1;
+    private String state;
+    private String city;
+    private String town;
 
-    private String depth2;
 
-    private String depth3;
-    
 }
