@@ -1,7 +1,9 @@
 package com.example.danggeunbunny.service.login;
 
+import com.example.danggeunbunny.dto.user.UserDto;
 import com.example.danggeunbunny.exception.user.UserNotFoundException;
 import com.example.danggeunbunny.model.user.User;
+import com.example.danggeunbunny.repository.user.UserRepository;
 import com.example.danggeunbunny.service.user.GeneralUserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -10,10 +12,14 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.web.MockHttpSession;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -23,6 +29,9 @@ class LoginServiceTest {
 
     @Mock
     private GeneralUserServiceImpl generalUserService;
+
+    @Mock
+    private UserRepository userRepository;
 
     protected MockHttpSession mockHttpSession;
 
@@ -57,6 +66,34 @@ class LoginServiceTest {
         assertThat(mockHttpSession.getAttribute(MEMBER_ID)).isNotNull();
 
         assertThat(mockHttpSession.getAttribute(MEMBER_ID)).isEqualTo(1L);
+
+    }
+
+    @Test
+    @DisplayName("사용자 로그인 요청시 입력한 이메일로 가입된 회원이 존제 하지 않은 경우 UserNotFoundException 발생")
+    void failToLoginUserNotFound() {
+
+        // given
+        when(generalUserService.findUserByEmail(any())).thenThrow(UserNotFoundException.class);
+
+        // then
+        assertThrows(UserNotFoundException.class, () -> {
+            userRepository.findUserByEmail(user.getEmail());
+
+        });
+    }
+
+    @Test
+    @DisplayName("사용자가 로그인 요청시 입력한 패스워드가 올바르지 않은경우 FALSE를 반환")
+    void failToLoginInvalidPassword() {
+
+        // given
+        UserDto userDto = mock(UserDto.class);
+        PasswordEncoder passwordEncoder = mock(PasswordEncoder.class);
+        when(generalUserService.isValidUser(any(), any())).thenReturn(false);
+
+        // then
+        assertFalse(generalUserService.isValidUser(userDto, passwordEncoder));
 
     }
 
