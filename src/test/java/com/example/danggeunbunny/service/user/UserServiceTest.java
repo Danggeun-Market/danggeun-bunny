@@ -1,5 +1,6 @@
 package com.example.danggeunbunny.service.user;
 
+import com.example.danggeunbunny.dto.profile.PasswordRequestDto;
 import com.example.danggeunbunny.dto.user.UserDto;
 import com.example.danggeunbunny.exception.user.UserNotFoundException;
 import com.example.danggeunbunny.model.user.User;
@@ -36,6 +37,8 @@ class UserServiceTest {
 
     private User user;
 
+    private PasswordRequestDto passwordRequestDto;
+
     @BeforeEach
     void setUp() {
         when(passwordEncoder.encode(any())).thenReturn("pillar0030!");
@@ -44,6 +47,8 @@ class UserServiceTest {
                 .password("pillar0030!")
                 .nickname("엄청난노옴")
                 .build();
+
+        passwordRequestDto = new PasswordRequestDto("pillar0030!", "PILLAR))#)!");
 
         user = UserDto.toEntity(userDto, passwordEncoder);
     }
@@ -115,6 +120,28 @@ class UserServiceTest {
         // then
         assertFalse(generalUserService.isValidUser(userDto, passwordEncoder));
 
+    }
 
+    @Test
+    @DisplayName("변경전 패스워드를 올바르게 입력한 경우")
+    void isValidOldPassword() {
+
+        // given
+        when(passwordEncoder.matches(any(), any())).thenReturn(true);
+
+        // then
+        assertTrue(generalUserService.isValidPassword(user, passwordRequestDto, passwordEncoder));
+
+    }
+
+    @Test
+    @DisplayName("변경전 패스워드를 다르게 입력한 경우")
+    void isNotValidPassword() {
+
+        // given
+        when(passwordEncoder.matches(any(), any())).thenReturn(false);
+
+        // then
+        assertFalse(generalUserService.isValidPassword(user, passwordRequestDto, passwordEncoder));
     }
 }
