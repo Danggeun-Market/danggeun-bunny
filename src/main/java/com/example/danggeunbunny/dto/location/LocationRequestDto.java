@@ -2,18 +2,19 @@ package com.example.danggeunbunny.dto.location;
 
 import com.example.danggeunbunny.model.address.Address;
 import com.example.danggeunbunny.model.address.Location;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
+@Builder
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @RequiredArgsConstructor
 public class LocationRequestDto {
 
-    private final String state;
-    private final String city;
-    private final String town;
-    private final Double longitude;
-    private final Double latitude;
+    private  String state;
+    private  String city;
+    private  String town;
+    private  Double longitude;
+    private  Double latitude;
 
     public Address toAddress() {
         return Address.builder()
