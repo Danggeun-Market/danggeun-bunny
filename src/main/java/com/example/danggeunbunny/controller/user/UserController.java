@@ -144,10 +144,19 @@ public class UserController {
         return RESPONSE_OK;
     }
 
+    /**
+     * 사용자 위치 등록 기능
+     * @param user
+     * @param locationRequestDto
+     * @return
+     */
     @LoginRequired
     @PutMapping("/my-location")
     public ResponseEntity<HttpStatus> setUserLocationAddress(@LoginUser User user, @RequestBody LocationRequestDto locationRequestDto) {
 
+        userService.setUserLocationAddress(user, locationRequestDto);
+
+        return RESPONSE_OK;
 
     }
 
