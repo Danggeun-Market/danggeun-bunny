@@ -23,7 +23,7 @@ class UserValidationTest {
     }
 
     @Test
-    @DisplayName("사요자가 정상적인 이메일과 패스워드를 입력한 경우 정상적으로 유효성 검사 통과")
+    @DisplayName("사용자가 정상적인 이메일과 패스워드를 입력한 경우 정상적으로 유효성 검사 통과")
     void isCorrectValidation() {
         UserDto userDto = UserDto.builder()
                 .email("lyutvs@gmail.com")

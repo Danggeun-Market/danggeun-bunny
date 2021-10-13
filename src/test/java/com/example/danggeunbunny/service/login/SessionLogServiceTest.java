@@ -14,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import static com.example.danggeunbunny.service.login.SessionLoginService.MEMBER_ID;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -23,21 +24,14 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class LoginServiceTest {
+class SessionLogServiceTest {
 
     private SessionLoginService loginService;
 
     @Mock
     private GeneralUserServiceImpl generalUserService;
 
-    @Mock
-    private UserRepository userRepository;
-
     protected MockHttpSession mockHttpSession;
-
-    private static final String MEMBER_ID = "MEMBER_ID";
-
-    private static final long LOGIN_MEMBER_ID = 1L;
 
     private User user;
 
@@ -60,7 +54,7 @@ class LoginServiceTest {
     void successToLogin() {
 
         // when
-        loginService.login(LOGIN_MEMBER_ID);
+        loginService.login(1L);
 
         // when
         assertThat(mockHttpSession.getAttribute(MEMBER_ID)).isNotNull();
@@ -78,7 +72,7 @@ class LoginServiceTest {
 
         // then
         assertThrows(UserNotFoundException.class, () -> {
-            userRepository.findUserByEmail(user.getEmail());
+            generalUserService.findUserByEmail(user.getEmail());
 
         });
     }
@@ -102,7 +96,7 @@ class LoginServiceTest {
     void successToLogout() {
 
         //given
-        mockHttpSession.setAttribute(MEMBER_ID, LOGIN_MEMBER_ID);
+        mockHttpSession.setAttribute(MEMBER_ID, 1L);
         // when
         loginService.logout();
 
@@ -116,7 +110,7 @@ class LoginServiceTest {
     void isExistLoginUser() {
 
         // given
-        mockHttpSession.setAttribute(MEMBER_ID, LOGIN_MEMBER_ID);
+        mockHttpSession.setAttribute(MEMBER_ID, 1L);
         when(generalUserService.findUserById(anyLong())).thenReturn(user);
 
         // when
