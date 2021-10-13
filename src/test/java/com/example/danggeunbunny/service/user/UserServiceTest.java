@@ -71,7 +71,7 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("중복된 이메일이 존재하지 않는 경우")
+    @DisplayName("중복된 이메일이 존재하지 않는 경우 FALSE 반환")
     void isNotDuplicatedEmailExist() {
 
         // given
@@ -83,7 +83,7 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("해당 이메일로 가입된 회원이 존재하는 경우")
+    @DisplayName("해당 이메일로 가입된 회원이 존재하는 경우 정상적으로 사용자 조회")
     void isExistUserFindByEmail() {
 
         // given
@@ -101,7 +101,7 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("해당 이메일로 가입된 회원이 존재하지 않는 경우")
+    @DisplayName("해당 이메일로 가입된 회원이 존재하지 않는 경우 UserNotFoundException 예외를 발생")
     void isNotExistUserFindByEmail() {
 
         // given
@@ -115,8 +115,8 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("사용자 정보가 유효한 경우")
-    void isValidUser() {
+    @DisplayName("사용자가 로그인 요청시 패스워드가 일치하면 TRUE 반환")
+    void isCorrectPassword() {
 
         // given
         when(userRepository.findUserByEmail(any())).thenReturn(Optional.of(user));
@@ -128,8 +128,8 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("사용자 정보가 유효하지 않은 경우")
-    void isNotValidUser() {
+    @DisplayName("사용자가 로그인 요청시 패스워드가 일치 하지 않으면 FALSE 반환")
+    void isNotCorrectPassword() {
 
         // given
         when(userRepository.findUserByEmail(any())).thenReturn(Optional.of(user));
@@ -140,7 +140,7 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("변경전 패스워드를 올바르게 입력한 경우")
+    @DisplayName("사용자가 패스워드 변경을 위해 이전 변경전 패스워드를 올바르게 입력한 경우 TRUE 반환")
     void isValidOldPassword() {
 
         // given
@@ -152,7 +152,7 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("변경전 패스워드를 다르게 입력한 경우")
+    @DisplayName("사요자가 패스워드 변경을 위해 변경전 패스워드를 다르게 입력한 경우 FALSE 반환")
     void isNotValidPassword() {
 
         // given
@@ -163,7 +163,7 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("사용자 프로필 변경 성공한 경우")
+    @DisplayName("사용자 프로필 변경 성공한 경우 사욪자 프로필 정보와 변경을 요청한 정보와 같다")
     void successToUpdateUserProfile() {
 
         // when
@@ -175,7 +175,7 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("사용자 패스워드 변경에 성공한 경우")
+    @DisplayName("사용자 패스워드 변경에 성공한 경우 사용자의 패스워드가 변경된 패스워드와 일치")
     void successToUpdatePassword() {
 
         // given
@@ -190,7 +190,7 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("사용자 위치 정보 등록에 성공한 경우")
+    @DisplayName("사용자 위치 정보 등록에 성공한 경우 사요자의 위치정보가 변경을 요청한 위치정보와 일치한다")
     void successToUpdateUserLocationAndAddress() {
 
         // whenn
