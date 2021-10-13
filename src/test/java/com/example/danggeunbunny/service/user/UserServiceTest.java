@@ -15,9 +15,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
@@ -37,7 +38,8 @@ class UserServiceTest {
 
     @BeforeEach
     void setUp() {
-        UserDto userDto = UserDto.builder()
+        when(passwordEncoder.encode(any())).thenReturn("pillar0030!");
+        userDto = UserDto.builder()
                 .email("lyutvs@gmail.com")
                 .password("pillar0030!")
                 .nickname("엄청난노옴")
@@ -90,6 +92,29 @@ class UserServiceTest {
         });
     }
 
+    @Test
+    @DisplayName("사용자 정보가 유효한 경우")
+    void isValidUser() {
+
+        // given
+        when(userRepository.findUserByEmail(any())).thenReturn(Optional.of(user));
+        when(passwordEncoder.matches(any(), any())).thenReturn(true);
+
+        // then
+        assertTrue(generalUserService.isValidUser(userDto, passwordEncoder));
+
+    }
+
+    @Test
+    @DisplayName("사용자 정보가 유효하지 않은 경우")
+    void isNotValidUser() {
+
+        // given
+        when(userRepository.findUserByEmail(any())).thenReturn(Optional.of(user));
+
+        // then
+        assertFalse(generalUserService.isValidUser(userDto, passwordEncoder));
 
 
+    }
 }
