@@ -37,7 +37,5 @@ out/
 .vscode/
 .idea
 build
-.gradle
-gradle
 
 resources
