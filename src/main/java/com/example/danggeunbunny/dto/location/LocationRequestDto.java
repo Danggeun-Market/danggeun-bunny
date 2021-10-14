@@ -5,9 +5,9 @@ import com.example.danggeunbunny.model.address.Location;
 import lombok.*;
 
 @Builder
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
 public class LocationRequestDto {
 
     private  String state;
