@@ -5,6 +5,18 @@ plugins {
     id 'org.springframework.experimental.aot' version '0.10.4'
     id 'org.graalvm.buildtools.native' version '0.9.3'
     id 'org.hibernate.orm'
+    id 'jacoco'
+}
+
+jacoco {
+    toolVersion = "0.8.5"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true // codecov depends on xml format report
+        html.enabled = true
+    }
 }
 
 group = 'com.example'
