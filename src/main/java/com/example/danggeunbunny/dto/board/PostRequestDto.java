@@ -1,5 +1,9 @@
 package com.example.danggeunbunny.dto.board;
 
+import com.example.danggeunbunny.model.board.entity.Category;
+import com.example.danggeunbunny.model.board.entity.Post;
+import com.example.danggeunbunny.model.board.entity.TradeStatus;
+import com.example.danggeunbunny.model.user.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.Length;
@@ -19,5 +23,17 @@ public class PostRequestDto {
 
     @NotEmpty
     private final String category;
+
+    public Post toEntity(User user) {
+        return Post.builder()
+                .title(this.title)
+                .content(this.content)
+                .category(Category.valueOf(this.category))
+                .author(user)
+                .address(user.getAddress())
+                .location(user.getLocation())
+                .status(TradeStatus.SALE)
+                .build();
+    }
 
 }

@@ -4,6 +4,7 @@ import com.example.danggeunbunny.model.address.Address;
 import com.example.danggeunbunny.model.address.Location;
 import com.example.danggeunbunny.model.board.BaseTimeEntity;
 import com.example.danggeunbunny.model.user.User;
+import lombok.Builder;
 
 import javax.persistence.*;
 
@@ -35,5 +36,18 @@ public class Post extends BaseTimeEntity {
 
     @Embedded
     private Location location;
+    @Builder
+    public Post(String title, Category category, TradeStatus status, User author,
+                String content, Address address, Location location) {
+        this.title = title;
+        this.category = category;
+        this.status = status;
+        this.author = author;
+        this.content = content;
+        this.address = address;
+        this.location = location;
+    }
+
+
 
 }
