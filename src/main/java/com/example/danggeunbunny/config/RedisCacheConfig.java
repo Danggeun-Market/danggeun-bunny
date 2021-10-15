@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -21,14 +22,14 @@ public class RedisCacheConfig {
     @Value("${spring.redis.cache.port}")
     private int port;
 
-    @Bean(name = "redisCacheConnectionFactory")
-    public RedisConnectionFactory redisCacheConnectionFactory() {
+    @Primary
+    @Bean(name = "redisSessionConnectionFactory")
+    public RedisConnectionFactory redisConnectionFactory() {
         return new LettuceConnectionFactory(new RedisStandaloneConfiguration(host, port));
     }
 
     @Bean
-    public RedisCacheManager redisCacheManager(@Qualifier("redisCacheConnectionFactory")
-                                                       RedisConnectionFactory redisConnectionFactory) {
+    public RedisCacheManager redisCacheManager(@Qualifier("redisSessionConnectionFactory") RedisConnectionFactory redisConnectionFactory) {
 
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
                 .serializeValuesWith(RedisSerializationContext.SerializationPair
