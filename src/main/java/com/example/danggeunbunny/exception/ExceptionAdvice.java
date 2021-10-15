@@ -1,5 +1,6 @@
 package com.example.danggeunbunny.exception;
 
+import com.example.danggeunbunny.exception.board.CategoryNotFoundException;
 import com.example.danggeunbunny.exception.user.UnAuthorizedAccessException;
 import com.example.danggeunbunny.exception.user.UserNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -29,5 +30,10 @@ public class ExceptionAdvice {
     public ResponseEntity<String> validationNotValidException(MethodArgumentNotValidException e) {
 
         return new ResponseEntity< >(e.getFieldError().getDefaultMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CategoryNotFoundException.class)
+    public ResponseEntity<String> categoryNotFoundException(CategoryNotFoundException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 }
