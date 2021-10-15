@@ -4,6 +4,7 @@ import com.example.danggeunbunny.annotation.login.LoginRequired;
 import com.example.danggeunbunny.annotation.login.LoginUser;
 import com.example.danggeunbunny.dto.post.PostCreateRequestDto;
 import com.example.danggeunbunny.dto.post.PostResponseDto;
+import com.example.danggeunbunny.model.board.entity.Post;
 import com.example.danggeunbunny.model.user.User;
 import com.example.danggeunbunny.service.Post.PostService;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 import static com.example.danggeunbunny.util.HttpStatusResponseEntity.RESPONSE_OK;
+import static com.example.danggeunbunny.util.HttpStatusResponseEntity.RESPONSE_UNAUTHORIZED;
 
 @RestController
 @RequiredArgsConstructor
@@ -42,6 +44,22 @@ public class PostController {
     public ResponseEntity<PostResponseDto> findPost(@PathVariable Long postId) {
 
         return ResponseEntity.ok(PostResponseDto.of(postService.findPostById(postId)));
+    }
+
+    @LoginRequired
+    @PutMapping("/{postId}")
+    public ResponseEntity<HttpStatus> updatePost(@Valid @RequestBody PostCreateRequestDto postCreateRequestDto, @PathVariable Long postId, @LoginUser User user) {
+
+        Post post = postService.findPostById(postId);
+
+        if (post.getAuthor() != user) {
+
+            return RESPONSE_UNAUTHORIZED;
+        }
+
+        postService.updatePost(post, postCreateRequestDto);
+
+        return RESPONSE_OK;
     }
 
 }
