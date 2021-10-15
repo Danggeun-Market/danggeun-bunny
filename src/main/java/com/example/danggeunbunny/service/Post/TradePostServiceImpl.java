@@ -3,6 +3,7 @@ package com.example.danggeunbunny.service.Post;
 import com.example.danggeunbunny.annotation.area.AreaInfoRequired;
 import com.example.danggeunbunny.dto.post.PostCreateRequestDto;
 import com.example.danggeunbunny.exception.board.CategoryNotFoundException;
+import com.example.danggeunbunny.exception.post.PostNotFoundException;
 import com.example.danggeunbunny.model.board.entity.Category;
 import com.example.danggeunbunny.model.board.entity.Post;
 import com.example.danggeunbunny.model.user.User;
@@ -34,6 +35,22 @@ public class TradePostServiceImpl implements PostService{
 
         postRepository.save(post);
 
+    }
 
+    @Override
+    public Post findPostById(Long postId) {
+
+        return postRepository.findPostById(postId).orElseThrow(PostNotFoundException::new);
+    }
+
+    @Override
+    @Transactional
+    public void updatePost(Post post, PostCreateRequestDto postCreateRequestDto) {
+
+        Category category = categoryRepository.findCategoryByCategoryName(
+                postCreateRequestDto.getCategory()).orElseThrow (() -> new CategoryNotFoundException(postCreateRequestDto.getCategory()));
+
+        post.updatePost(postCreateRequestDto);
+        post.setCategory(category);
     }
 }
