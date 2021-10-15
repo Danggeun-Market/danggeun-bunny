@@ -1,5 +1,6 @@
 package com.example.danggeunbunny.exception;
 
+import com.example.danggeunbunny.exception.board.AreaInfoNotDefinedException;
 import com.example.danggeunbunny.exception.board.CategoryNotFoundException;
 import com.example.danggeunbunny.exception.user.UnAuthorizedAccessException;
 import com.example.danggeunbunny.exception.user.UserNotFoundException;
@@ -36,4 +37,11 @@ public class ExceptionAdvice {
     public ResponseEntity<String> categoryNotFoundException(CategoryNotFoundException e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(AreaInfoNotDefinedException.class)
+    public ResponseEntity<String> areaInfoNotDefinedException(AreaInfoNotDefinedException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
+    }
+
+
 }
