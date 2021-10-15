@@ -28,7 +28,6 @@ public class PostCreateRequestDto {
         return Post.builder()
                 .title(this.title)
                 .content(this.content)
-                .category(Category.valueOf(this.category))
                 .author(user)
                 .address(user.getAddress())
                 .location(user.getLocation())
