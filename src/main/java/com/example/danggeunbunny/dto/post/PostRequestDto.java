@@ -1,4 +1,4 @@
-package com.example.danggeunbunny.dto.board;
+package com.example.danggeunbunny.dto.post;
 
 import com.example.danggeunbunny.model.board.entity.Category;
 import com.example.danggeunbunny.model.board.entity.Post;
