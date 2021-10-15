@@ -1,4 +1,4 @@
-package com.example.danggeunbunny.dto.board;
+package com.example.danggeunbunny.dto.post;
 
 import com.example.danggeunbunny.model.board.entity.Category;
 import com.example.danggeunbunny.model.board.entity.Post;
@@ -12,7 +12,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Getter
 @RequiredArgsConstructor
-public class PostRequestDto {
+public class PostCreateRequestDto {
 
     @NotEmpty
     @Length(max = 100, message = "제목은 최대 100글자를 넘을 수 없습니다.")
@@ -28,7 +28,6 @@ public class PostRequestDto {
         return Post.builder()
                 .title(this.title)
                 .content(this.content)
-                .category(Category.valueOf(this.category))
                 .author(user)
                 .address(user.getAddress())
                 .location(user.getLocation())

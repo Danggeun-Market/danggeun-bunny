@@ -18,7 +18,8 @@ public class Post extends BaseTimeEntity {
 
     private String title;
 
-    @Enumerated(EnumType.STRING)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CATEGORY_ID")
     private Category category;
 
     @Enumerated(EnumType.STRING)
@@ -37,10 +38,9 @@ public class Post extends BaseTimeEntity {
     @Embedded
     private Location location;
     @Builder
-    public Post(String title, Category category, TradeStatus status, User author,
+    public Post(String title, TradeStatus status, User author,
                 String content, Address address, Location location) {
         this.title = title;
-        this.category = category;
         this.status = status;
         this.author = author;
         this.content = content;
@@ -48,6 +48,12 @@ public class Post extends BaseTimeEntity {
         this.location = location;
     }
 
+    public Post() {
 
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
 }
