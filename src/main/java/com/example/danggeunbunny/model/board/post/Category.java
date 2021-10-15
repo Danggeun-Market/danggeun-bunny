@@ -1,11 +1,14 @@
 package com.example.danggeunbunny.model.board.post;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Getter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Category {
 
     @Id

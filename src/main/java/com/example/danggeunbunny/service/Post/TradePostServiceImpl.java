@@ -54,3 +54,4 @@ public class TradePostServiceImpl implements PostService{
         post.setCategory(category);
     }
 }
+
