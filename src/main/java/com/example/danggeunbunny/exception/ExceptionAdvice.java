@@ -2,6 +2,7 @@ package com.example.danggeunbunny.exception;
 
 import com.example.danggeunbunny.exception.board.AreaInfoNotDefinedException;
 import com.example.danggeunbunny.exception.board.CategoryNotFoundException;
+import com.example.danggeunbunny.exception.post.PostNotFoundException;
 import com.example.danggeunbunny.exception.user.UnAuthorizedAccessException;
 import com.example.danggeunbunny.exception.user.UserNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -43,5 +44,8 @@ public class ExceptionAdvice {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
     }
 
-
+    @ExceptionHandler(PostNotFoundException.class)
+    public ResponseEntity<HttpStatus> postNotFoundException() {
+        return RESPONSE_NOT_FOUND;
+    }
 }
