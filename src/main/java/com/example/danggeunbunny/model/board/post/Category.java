@@ -1,4 +1,4 @@
-package com.example.danggeunbunny.model.board.entity;
+package com.example.danggeunbunny.model.board.post;
 
 import lombok.Getter;
 

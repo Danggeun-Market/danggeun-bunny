@@ -1,8 +1,7 @@
 package com.example.danggeunbunny.dto.post;
 
-import com.example.danggeunbunny.model.board.entity.Category;
-import com.example.danggeunbunny.model.board.entity.Post;
-import com.example.danggeunbunny.model.board.entity.TradeStatus;
+import com.example.danggeunbunny.model.board.post.Post;
+import com.example.danggeunbunny.model.board.post.TradeStatus;
 import com.example.danggeunbunny.model.user.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

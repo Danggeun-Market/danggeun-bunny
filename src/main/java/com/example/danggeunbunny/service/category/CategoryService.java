@@ -1,6 +1,6 @@
 package com.example.danggeunbunny.service.category;
 
-import com.example.danggeunbunny.model.board.entity.Category;
+import com.example.danggeunbunny.model.board.post.Category;
 
 public interface CategoryService {
 

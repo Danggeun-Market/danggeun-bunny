@@ -2,7 +2,7 @@ package com.example.danggeunbunny.dto.post;
 
 import com.example.danggeunbunny.model.address.Address;
 import com.example.danggeunbunny.model.address.Location;
-import com.example.danggeunbunny.model.board.entity.Post;
+import com.example.danggeunbunny.model.board.post.Post;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

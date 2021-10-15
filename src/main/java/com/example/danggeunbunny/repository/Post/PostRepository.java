@@ -1,6 +1,6 @@
 package com.example.danggeunbunny.repository.Post;
 
-import com.example.danggeunbunny.model.board.entity.Post;
+import com.example.danggeunbunny.model.board.post.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

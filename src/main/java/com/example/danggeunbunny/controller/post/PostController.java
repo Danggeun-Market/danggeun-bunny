@@ -4,7 +4,7 @@ import com.example.danggeunbunny.annotation.login.LoginRequired;
 import com.example.danggeunbunny.annotation.login.LoginUser;
 import com.example.danggeunbunny.dto.post.PostCreateRequestDto;
 import com.example.danggeunbunny.dto.post.PostResponseDto;
-import com.example.danggeunbunny.model.board.entity.Post;
+import com.example.danggeunbunny.model.board.post.Post;
 import com.example.danggeunbunny.model.user.User;
 import com.example.danggeunbunny.service.Post.PostService;
 import lombok.RequiredArgsConstructor;
