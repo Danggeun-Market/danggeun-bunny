@@ -23,7 +23,9 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.example.danggeunbunny.enumeration.CacheKey.*;
+import static com.example.danggeunbunny.config.cache.CacheExpireConfig.POST_CACHE_EXPIRE_TIME;
+import static com.example.danggeunbunny.config.cache.CacheKeyConfig.POST;
+import static org.apache.logging.log4j.Level.CATEGORY;
 
 @Configuration
 @EnableCaching
