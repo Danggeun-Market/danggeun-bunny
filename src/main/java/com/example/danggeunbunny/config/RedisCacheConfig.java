@@ -23,6 +23,7 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.danggeunbunny.config.cache.CacheExpireConfig.CATEGORY_CACHE_EXPIRE_TIME;
 import static com.example.danggeunbunny.config.cache.CacheExpireConfig.POST_CACHE_EXPIRE_TIME;
 import static com.example.danggeunbunny.config.cache.CacheKeyConfig.POST;
 import static org.apache.logging.log4j.Level.CATEGORY;
@@ -77,7 +78,7 @@ public class RedisCacheConfig {
 
         Map<String, RedisCacheConfiguration> configurations = new HashMap<>();
         configurations.put(POST, redisCacheConfiguration.entryTtl(POST_CACHE_EXPIRE_TIME));
-        configurations.put(CATEGORY, redisCacheConfiguration);
+        configurations.put(CATEGORY, redisCacheConfiguration.entryTtl(CATEGORY_CACHE_EXPIRE_TIME));
 
         return RedisCacheManager.builder(redisConnectionFactory)
                 .withInitialCacheConfigurations(configurations)
