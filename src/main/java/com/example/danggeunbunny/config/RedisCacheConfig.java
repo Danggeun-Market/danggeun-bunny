@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.jsontype.BasicPolymorphicTypeValidator;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -19,7 +20,13 @@ import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSeriali
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.example.danggeunbunny.enumeration.CacheKey.*;
+
 @Configuration
+@EnableCaching
 public class RedisCacheConfig {
 
     @Value("${spring.redis.cache.host}")
@@ -62,11 +69,16 @@ public class RedisCacheConfig {
     public RedisCacheManager redisCacheManager(@Qualifier("redisSessionConnectionFactory") RedisConnectionFactory redisConnectionFactory, @Qualifier("redisObjectMapper") ObjectMapper objectMapper) {
 
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
+                .disableCachingNullValues()
                 .serializeValuesWith(RedisSerializationContext.SerializationPair
                         .fromSerializer(new GenericJackson2JsonRedisSerializer(objectMapper)));
 
+        Map<String, RedisCacheConfiguration> configurations = new HashMap<>();
+        configurations.put(POST, redisCacheConfiguration.entryTtl(POST_CACHE_EXPIRE_TIME));
+        configurations.put(CATEGORY, redisCacheConfiguration);
+
         return RedisCacheManager.builder(redisConnectionFactory)
-                .cacheDefaults(redisCacheConfiguration)
+                .withInitialCacheConfigurations(configurations)
                 .build();
     }
 
