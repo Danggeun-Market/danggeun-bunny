@@ -46,17 +46,35 @@ public class TradePostServiceImpl implements PostService{
     @Transactional
     public boolean updatePost(Post post, PostCreateRequestDto postCreateRequestDto) {
 
-        User user = loginService.getLoginUser();
+        if (isMatchedAuthor(post)) {
+            Category category = categoryService.findCategoryByName(postCreateRequestDto.getCategory());
 
-        if (post.getAuthor() != user) {
-            return false;
-        }
-        Category category =  categoryService.findCategoryByName(postCreateRequestDto.getCategory());
 
         post.updatePost(postCreateRequestDto);
         post.setCategory(category);
-        return true;
 
+        return true;
+         }
+
+        return false;
+    }
+
+    @Override
+    @Transactional
+    public boolean removePost(Post post) {
+
+        if(isMatchedAuthor(post)) {
+            post.removedPost();
+            return true;
+        }
+
+        return false;
+
+    }
+
+    @Override
+    public boolean isMatchedAuthor(Post post) {
+        return false;
     }
 }
 

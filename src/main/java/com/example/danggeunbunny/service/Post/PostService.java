@@ -14,5 +14,8 @@ public interface PostService {
 
     public boolean updatePost(Post post, PostCreateRequestDto postCreateRequestDto);
 
+    public boolean removePost(Post post);
+
+    public boolean isMatchedAuthor(Post post);
 }
 

@@ -85,7 +85,7 @@ public class Post extends BaseTimeEntity {
         this.content = postCreateRequestDto.getContent();
     }
 
-    public void removed() {
+    public void removedPost() {
         this.isRemoved = true;
     }
 
