@@ -44,6 +44,10 @@ public class Post extends BaseTimeEntity {
 
     @Embedded
     private Location location;
+
+    @Column(name = "IS_REMOVED")
+    private boolean isRemoved = false;
+
     @Builder
     public Post(String title, TradeStatus status, User author,
                 String content, Address address, Location location) {
@@ -79,6 +83,10 @@ public class Post extends BaseTimeEntity {
     public void updatePost(PostCreateRequestDto postCreateRequestDto) {
         this.title = postCreateRequestDto.getTitle();
         this.content = postCreateRequestDto.getContent();
+    }
+
+    public void removed() {
+        this.isRemoved = true;
     }
 
 }

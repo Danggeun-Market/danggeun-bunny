@@ -56,7 +56,7 @@ public class TradePostServiceImpl implements PostService{
         post.updatePost(postCreateRequestDto);
         post.setCategory(category);
         return true;
-        
+
     }
 }
 
