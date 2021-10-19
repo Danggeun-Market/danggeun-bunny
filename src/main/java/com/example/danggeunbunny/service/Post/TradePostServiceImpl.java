@@ -74,7 +74,14 @@ public class TradePostServiceImpl implements PostService{
 
     @Override
     public boolean isMatchedAuthor(Post post) {
-        return false;
+
+        User user = loginService.getLoginUser();
+
+        if (post.getAuthor() != user) {
+            return false;
+        }
+
+        return true;
     }
 }
 
