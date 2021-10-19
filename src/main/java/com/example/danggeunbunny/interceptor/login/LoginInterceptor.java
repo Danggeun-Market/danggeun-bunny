@@ -1,8 +1,7 @@
 package com.example.danggeunbunny.interceptor.login;
 
 import com.example.danggeunbunny.annotation.login.LoginRequired;
-import com.example.danggeunbunny.exception.user.UnAuthorizedAccessException;
-import com.example.danggeunbunny.model.user.User;
+import com.example.danggeunbunny.exception.client.UnAuthenticatedAccessException;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
@@ -24,9 +23,8 @@ public class LoginInterceptor implements HandlerInterceptor {
         Long userId = (Long) request.getSession().getAttribute(MEMBER_ID);
         if (handlerMethod.hasMethodAnnotation(LoginRequired.class) && userId == null) {
 
-            throw new UnAuthorizedAccessException();
+            throw new UnAuthenticatedAccessException();
         }
         return true;
-
-    }
+        }
 }

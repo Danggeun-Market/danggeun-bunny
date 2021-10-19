@@ -2,6 +2,7 @@ package com.example.danggeunbunny.exception;
 
 import com.example.danggeunbunny.exception.board.AreaInfoNotDefinedException;
 import com.example.danggeunbunny.exception.board.CategoryNotFoundException;
+import com.example.danggeunbunny.exception.client.UnAuthenticatedAccessException;
 import com.example.danggeunbunny.exception.post.PostNotFoundException;
 import com.example.danggeunbunny.exception.user.UnAuthorizedAccessException;
 import com.example.danggeunbunny.exception.user.UserNotFoundException;
@@ -54,8 +55,9 @@ public class ExceptionAdvice {
     }
 
     @ExceptionHandler(UnAuthorizedAccessException.class)
-    public ResponseEntity<HttpStatus> httpStatusResponseEntity() {
-        
+    public ResponseEntity<HttpStatus> unAuthenticatedAccessException() {
+
         return RESPONSE_UNAUTHORIZED;
     }
+
 }
