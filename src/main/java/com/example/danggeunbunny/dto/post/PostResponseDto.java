@@ -3,15 +3,14 @@ package com.example.danggeunbunny.dto.post;
 import com.example.danggeunbunny.model.address.Address;
 import com.example.danggeunbunny.model.address.Location;
 import com.example.danggeunbunny.model.board.post.Post;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Builder
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
 public class PostResponseDto {
 
     private Long id;

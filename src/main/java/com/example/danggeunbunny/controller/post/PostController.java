@@ -52,10 +52,6 @@ public class PostController {
 
         Post post = postService.findPostById(postId);
 
-        if (postService.updatePost(post, postCreateRequestDto)) {
-
-            return RESPONSE_OK;
-        }
 
         postService.updatePost(post, postCreateRequestDto);
 
@@ -68,11 +64,7 @@ public class PostController {
 
         Post post = postService.findPostById(postId);
 
-        if (postService.removePost(post)) {
-            return RESPONSE_OK;
-
-        }
-
+        postService.removePost(post);
         return RESPONSE_OK;
     }
 
