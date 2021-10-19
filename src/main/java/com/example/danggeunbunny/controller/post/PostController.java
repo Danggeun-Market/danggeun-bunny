@@ -59,7 +59,7 @@ public class PostController {
 
         postService.updatePost(post, postCreateRequestDto);
 
-        return RESPONSE_UNAUTHORIZED;
+            return RESPONSE_OK;
     }
 
     @LoginRequired
@@ -73,7 +73,7 @@ public class PostController {
 
         }
 
-        return RESPONSE_UNAUTHORIZED;
+        return RESPONSE_OK;
     }
 
 }

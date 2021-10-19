@@ -12,9 +12,9 @@ public interface PostService {
 
     public Post findPostById(Long postId);
 
-    public boolean updatePost(Post post, PostCreateRequestDto postCreateRequestDto);
+    public void updatePost(Post post, PostCreateRequestDto postCreateRequestDto);
 
-    public boolean removePost(Post post);
+    public void removePost(Post post);
 
     public boolean isMatchedAuthor(Post post);
 }

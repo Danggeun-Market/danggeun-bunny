@@ -3,6 +3,7 @@ package com.example.danggeunbunny.service.Post;
 import com.example.danggeunbunny.annotation.area.AreaInfoRequired;
 import com.example.danggeunbunny.dto.post.PostCreateRequestDto;
 import com.example.danggeunbunny.exception.post.PostNotFoundException;
+import com.example.danggeunbunny.exception.user.UnAuthorizedAccessException;
 import com.example.danggeunbunny.model.board.post.Category;
 import com.example.danggeunbunny.model.board.post.Post;
 import com.example.danggeunbunny.model.user.User;
@@ -44,7 +45,7 @@ public class TradePostServiceImpl implements PostService{
 
     @Override
     @Transactional
-    public boolean updatePost(Post post, PostCreateRequestDto postCreateRequestDto) {
+    public void updatePost(Post post, PostCreateRequestDto postCreateRequestDto) {
 
         if (isMatchedAuthor(post)) {
             Category category = categoryService.findCategoryByName(postCreateRequestDto.getCategory());
@@ -53,22 +54,17 @@ public class TradePostServiceImpl implements PostService{
         post.updatePost(postCreateRequestDto);
         post.setCategory(category);
 
-        return true;
          }
 
-        return false;
     }
 
     @Override
     @Transactional
-    public boolean removePost(Post post) {
+    public void removePost(Post post) {
 
         if(isMatchedAuthor(post)) {
             post.removedPost();
-            return true;
         }
-
-        return false;
 
     }
 
@@ -78,7 +74,13 @@ public class TradePostServiceImpl implements PostService{
         User user = loginService.getLoginUser();
 
         if (post.getAuthor() != user) {
-            return false;
+            try {
+                throw new UnAuthorizedAccessException();
+
+            } catch (UnAuthorizedAccessException e) {
+
+                e.printStackTrace();
+            }
         }
 
         return true;
