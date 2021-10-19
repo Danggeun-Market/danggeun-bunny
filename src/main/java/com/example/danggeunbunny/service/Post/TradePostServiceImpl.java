@@ -8,6 +8,7 @@ import com.example.danggeunbunny.model.board.post.Post;
 import com.example.danggeunbunny.model.user.User;
 import com.example.danggeunbunny.repository.Post.PostRepository;
 import com.example.danggeunbunny.service.category.CategoryService;
+import com.example.danggeunbunny.service.login.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,7 @@ public class TradePostServiceImpl implements PostService{
 
     private final PostRepository postRepository;
     private final CategoryService categoryService;
+    private final LoginService loginService;
 
 
     @Override
@@ -42,12 +44,37 @@ public class TradePostServiceImpl implements PostService{
 
     @Override
     @Transactional
-    public void updatePost(Post post, PostCreateRequestDto postCreateRequestDto) {
+    public boolean updatePost(Post post, PostCreateRequestDto postCreateRequestDto) {
 
-        Category category =  categoryService.findCategoryByName(postCreateRequestDto.getCategory());
+        if (isMatchedAuthor(post)) {
+            Category category = categoryService.findCategoryByName(postCreateRequestDto.getCategory());
+
 
         post.updatePost(postCreateRequestDto);
         post.setCategory(category);
+
+        return true;
+         }
+
+        return false;
+    }
+
+    @Override
+    @Transactional
+    public boolean removePost(Post post) {
+
+        if(isMatchedAuthor(post)) {
+            post.removedPost();
+            return true;
+        }
+
+        return false;
+
+    }
+
+    @Override
+    public boolean isMatchedAuthor(Post post) {
+        return false;
     }
 }
 
