@@ -2,6 +2,7 @@ package com.example.danggeunbunny.exception;
 
 import com.example.danggeunbunny.exception.board.AreaInfoNotDefinedException;
 import com.example.danggeunbunny.exception.board.CategoryNotFoundException;
+import com.example.danggeunbunny.exception.client.UnAuthenticatedAccessException;
 import com.example.danggeunbunny.exception.post.PostNotFoundException;
 import com.example.danggeunbunny.exception.user.UnAuthorizedAccessException;
 import com.example.danggeunbunny.exception.user.UserNotFoundException;
@@ -11,8 +12,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import static com.example.danggeunbunny.util.HttpStatusResponseEntity.RESPONSE_NOT_FOUND;
-import static com.example.danggeunbunny.util.HttpStatusResponseEntity.RESPONSE_UNAUTHORIZED;
+import static com.example.danggeunbunny.util.HttpStatusResponseEntity.*;
 
 
 @RestControllerAdvice
@@ -20,12 +20,14 @@ public class ExceptionAdvice {
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<HttpStatus> userNotFoundException() {
+
         return RESPONSE_NOT_FOUND;
     }
 
     @ExceptionHandler(UnAuthorizedAccessException.class)
     public ResponseEntity<HttpStatus> unAuthorizedAccessException() {
-        return RESPONSE_UNAUTHORIZED;
+
+        return RESPONSE_FORBIDDEN;
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -36,16 +38,26 @@ public class ExceptionAdvice {
 
     @ExceptionHandler(CategoryNotFoundException.class)
     public ResponseEntity<String> categoryNotFoundException(CategoryNotFoundException e) {
+
         return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(AreaInfoNotDefinedException.class)
     public ResponseEntity<String> areaInfoNotDefinedException(AreaInfoNotDefinedException e) {
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
+
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler(PostNotFoundException.class)
     public ResponseEntity<HttpStatus> postNotFoundException() {
+
         return RESPONSE_NOT_FOUND;
     }
+
+    @ExceptionHandler(UnAuthorizedAccessException.class)
+    public ResponseEntity<HttpStatus> unAuthenticatedAccessException() {
+
+        return RESPONSE_UNAUTHORIZED;
+    }
+
 }

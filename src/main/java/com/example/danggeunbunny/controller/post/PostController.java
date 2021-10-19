@@ -52,14 +52,20 @@ public class PostController {
 
         Post post = postService.findPostById(postId);
 
-        if (postService.updatePost(post, postCreateRequestDto)) {
-
-            return RESPONSE_OK;
-        }
 
         postService.updatePost(post, postCreateRequestDto);
 
-        return RESPONSE_UNAUTHORIZED;
+            return RESPONSE_OK;
+    }
+
+    @LoginRequired
+    @DeleteMapping("/{postId}")
+    public ResponseEntity<HttpStatus> deletePost(@PathVariable Long postId) {
+
+        Post post = postService.findPostById(postId);
+
+        postService.removePost(post);
+        return RESPONSE_OK;
     }
 
 }
