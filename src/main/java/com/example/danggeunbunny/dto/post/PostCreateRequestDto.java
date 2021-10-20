@@ -4,12 +4,14 @@ import com.example.danggeunbunny.model.board.post.Post;
 import com.example.danggeunbunny.model.board.post.TradeStatus;
 import com.example.danggeunbunny.model.user.User;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
 
+@Builder
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
