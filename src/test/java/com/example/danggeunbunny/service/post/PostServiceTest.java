@@ -1,6 +1,7 @@
 package com.example.danggeunbunny.service.post;
 
 import com.example.danggeunbunny.dto.post.PostCreateRequestDto;
+import com.example.danggeunbunny.exception.post.PostNotFoundException;
 import com.example.danggeunbunny.model.board.post.Category;
 import com.example.danggeunbunny.model.board.post.Post;
 import com.example.danggeunbunny.model.user.User;
@@ -16,6 +17,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -62,7 +68,7 @@ class PostServiceTest {
 
     @Test
     @DisplayName("게시글이 성공적으로 등록될 경우 PostRepository.save(Post post), " +
-            "CategoryService.findCategoryByName(String category) 메서드가 한번씩 호출된다.")
+            "CategoryService.findCategoryByName(String category) 메서드가 한번씩 호출.")
     void successToCreatePost() {
         // given
         when(categoryService.findCategoryByName(any())).thenReturn(category);
@@ -73,5 +79,36 @@ class PostServiceTest {
         // then
         verify(postRepository, times(1)).save(any(Post.class));
         verify(categoryService, times(1)).findCategoryByName(anyString());
+    }
+
+    @Test
+    @DisplayName("해당 아이디의 게시글이 존재하지 않으면 PostNotFoundException 예외를 발생시킴")
+    void isNotExistPostFindById() {
+
+        // given
+        when(postRepository.findPostById(any())).thenReturn(Optional.empty());
+
+        // then
+        assertThrows(PostNotFoundException.class, () -> {
+
+            Post findByPostId = postService.findPostById(1L);
+        });
+    }
+
+    @Test
+    @DisplayName("해당 아이디의 게시글이 존재하는 경우 정상적으로 게시글을 조회.")
+    void isExistPostFindById() {
+
+        // given
+        when(postRepository.findPostById(any())).thenReturn(Optional.of(post));
+
+        // when
+        Post findByPostId = postService.findPostById(post.getId());
+
+        // then
+        assertThat(findByPostId).isNotNull();
+        assertThat(findByPostId.getId()).isEqualTo(post.getId());
+        assertThat(findByPostId.getTitle()).isEqualTo(post.getTitle());
+        assertThat(findByPostId.getContent()).isEqualTo(post.getContent());
     }
 }
