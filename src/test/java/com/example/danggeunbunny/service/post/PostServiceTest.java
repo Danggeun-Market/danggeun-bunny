@@ -151,7 +151,6 @@ class PostServiceTest {
 
         // given
         Post post = mock(Post.class);
-        when(post.removedPost()).thenReturn(true);
 
         // when
         postService.removePost(post);
@@ -161,5 +160,18 @@ class PostServiceTest {
             postService.removePost(post);
         });
 
+    }
+
+    @Test
+    @DisplayName("작성자가 일치하지 않을 경우 게시글이 삭제에 실패하고 UnAuthroizedAccessException이 발생한다.")
+    void isUnAuthorizedMemberToRemovePost() {
+        // given
+        User user = mock(User.class);
+        when(loginService.getLoginUser()).thenReturn(user);
+
+        // then
+        assertThrows(UnAuthorizedAccessException.class, () -> {
+            postService.removePost(post);
+        });
     }
 }
