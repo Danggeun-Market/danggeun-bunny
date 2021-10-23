@@ -2,6 +2,7 @@ package com.example.danggeunbunny.service.post;
 
 import com.example.danggeunbunny.dto.post.PostCreateRequestDto;
 import com.example.danggeunbunny.exception.post.PostNotFoundException;
+import com.example.danggeunbunny.exception.user.UnAuthorizedAccessException;
 import com.example.danggeunbunny.model.board.post.Category;
 import com.example.danggeunbunny.model.board.post.Post;
 import com.example.danggeunbunny.model.user.User;
@@ -20,7 +21,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -100,7 +100,7 @@ class PostServiceTest {
     void isExistPostFindById() {
 
         // given
-        when(postRepository.findPostById(any())).thenReturn(Optional.of(post));
+        when(postRepository.findPostById(any())).   thenReturn(Optional.of(post));
 
         // when
         Post findByPostId = postService.findPostById(post.getId());
@@ -110,5 +110,56 @@ class PostServiceTest {
         assertThat(findByPostId.getId()).isEqualTo(post.getId());
         assertThat(findByPostId.getTitle()).isEqualTo(post.getTitle());
         assertThat(findByPostId.getContent()).isEqualTo(post.getContent());
+    }
+
+    @Test
+    @DisplayName("게시물이 성공적으로 업데이트 되는 경우 Post.updatePost(PostRequest request), " +
+            "Post.setCategory(Category category), CategoryService.findCategoryByName(String catrgoey) 메서트 반환됨")
+        void successToUpdatePost() {
+
+        // given
+        Post post = mock(Post.class);
+        when(post.getAuthor()).thenReturn(user);
+        when(categoryService.findCategoryByName(any())).thenReturn(category);
+        when(loginService.getLoginUser()).thenReturn(user);
+
+        // when
+        postService.updatePost(post, postCreateRequestDto);
+
+        // then
+        verify(post, times(1)).updatePost(postCreateRequestDto);
+        verify(post, times(1)).setCategory(category);
+    }
+
+    @Test
+    @DisplayName("작성자가 일치하지 않을 경우 게시글 업데이트가 실패하고 UnAuthorizedAccessException이 발생")
+    void isUnAuthorizedUserToUpdatePost() {
+
+        // given
+        User user = mock(User.class);
+        when(loginService.getLoginUser()).thenReturn(user);
+
+        // then
+        assertThrows(UnAuthorizedAccessException.class, () -> {
+            postService.updatePost(post, postCreateRequestDto);
+        });
+    }
+
+    @Test
+    @DisplayName("작성자가 일치할 경우 게시글 삭제에 성공하고 게시글의 removed가 true로 변경된다.")
+    void successToRemovePost() {
+
+        // given
+        Post post = mock(Post.class);
+        when(post.removedPost()).thenReturn(true);
+
+        // when
+        postService.removePost(post);
+
+        // then
+        assertThrows(UnAuthorizedAccessException.class, () -> {
+            postService.removePost(post);
+        });
+
     }
 }
