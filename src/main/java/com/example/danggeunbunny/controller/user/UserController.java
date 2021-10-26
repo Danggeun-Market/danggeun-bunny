@@ -29,6 +29,8 @@ import static com.example.danggeunbunny.util.HttpStatusResponseEntity.*;
 @RequestMapping("/api/users")
 public class UserController {
 
+    public static final String USER_API_URI = "/api/user";
+
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
     private final LoginService loginService;

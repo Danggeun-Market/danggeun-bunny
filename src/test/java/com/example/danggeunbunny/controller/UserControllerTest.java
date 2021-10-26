@@ -122,4 +122,38 @@ public class UserControllerTest {
                 ));
 
     }
+
+//    @Test
+//    @DisplayName("이메일 중복검사에 성공하여 중복된 이메일이 없으면 HTTP 상태코드 200 반혼")
+//    void isNotExistDuplicatedEmail() throws Exception {
+//
+//        when(userService.isDuplicatedEmail(UNIQUE_USER_EMAIL)).thenReturn(false);
+//
+//        mockMvc.perform(get(USER_API_URI + "/duplicated/{email}", UNIQUE_USER_EMAIL))
+//            .andExpect(status().isOk())
+//            .andDo(document("user/duplicatedEmail/success",
+//                   preprocessRequest(prettyPrint()),
+//    pathParameters(
+//            parameterWithName("email")
+//                                    .description("로그인시 사용할 사용자 이메일")
+//                        )
+//                                ));
+//}
+//
+//    @Test
+//    @DisplayName("이메일 중복검사에 실패하여 중복된 이메일이 존재하면 HTTP 상태코드 409를 반환한다.")
+//    void isExistDuplicatedEmail() throws Exception {
+//        when(userService.isDuplicatedEmail(DUPLICATED_USER_EMAIL)).thenReturn(true);
+//
+//        mockMvc.perform(get(USER_API_URI + "/duplicated/{email}", DUPLICATED_USER_EMAIL))
+//                .andExpect(status().isConflict())
+//                .andDo(document("user/duplicatedEmail/fail",
+//                        preprocessRequest(prettyPrint()),
+//                        pathParameters(
+//                                parameterWithName("email")
+//                                        .description("로그인시 사용할 사용자 이메일")
+//                        )
+//                ));
+//    }
+
 }
