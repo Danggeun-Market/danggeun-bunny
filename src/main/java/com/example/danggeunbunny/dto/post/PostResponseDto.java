@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 @Getter
 public class PostResponseDto {
 
-    private Long id;
     private String title;
     private String author;
     private String email;
@@ -28,7 +27,6 @@ public class PostResponseDto {
 
     public static PostResponseDto of(Post post) {
         return PostResponseDto.builder()
-                .id(post.getId())
                 .title(post.getTitle())
                 .author(post.getAuthor().getNickname())
                 .email(post.getAuthor().getEmail())
