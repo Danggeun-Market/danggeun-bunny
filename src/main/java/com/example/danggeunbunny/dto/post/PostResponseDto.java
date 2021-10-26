@@ -6,6 +6,8 @@ import com.example.danggeunbunny.model.board.post.Post;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Builder
 @Getter
@@ -24,6 +26,17 @@ public class PostResponseDto {
 
     private LocalDateTime createdTime;
     private LocalDateTime modifiedTime;
+
+    private int totalPage;
+    private int currentPage;
+    private List<PostResponseDto> postResponses = new ArrayList<>();
+
+    @Builder
+    public PostResponseDto(int totalPage, int currentPage, List<PostResponseDto> postResponses) {
+        this.totalPage = totalPage;
+        this.currentPage = currentPage;
+        this.postResponses = postResponses;
+    }
 
     public static PostResponseDto of(Post post) {
         return PostResponseDto.builder()
