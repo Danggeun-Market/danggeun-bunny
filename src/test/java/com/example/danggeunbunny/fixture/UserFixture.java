@@ -5,6 +5,10 @@ import com.example.danggeunbunny.model.user.User;
 
 public class UserFixture {
 
+    public static final String UNIQUE_USER_EMAIL = "unique@daangnmarket.com";
+
+    public static final String DUPLICATED_USER_EMAIL = "duplicated@daangnmarket.com";
+
 
     public static final User ADMIN_USER = new User(
             "admin@daangnmarket.com",

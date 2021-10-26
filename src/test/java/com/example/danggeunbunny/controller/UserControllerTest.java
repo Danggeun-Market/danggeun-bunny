@@ -25,8 +25,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static com.example.danggeunbunny.controller.user.UserController.USER_API_URI;
-import static com.example.danggeunbunny.fixture.UserFixture.NEW_USER;
-import static com.example.danggeunbunny.fixture.UserFixture.USER_REGISTRATION_REQUEST;
+import static com.example.danggeunbunny.fixture.UserFixture.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
@@ -127,7 +126,7 @@ public class UserControllerTest {
 //    @DisplayName("이메일 중복검사에 성공하여 중복된 이메일이 없으면 HTTP 상태코드 200 반혼")
 //    void isNotExistDuplicatedEmail() throws Exception {
 //
-//        when(userService.isDuplicatedEmail(UNIQUE_USER_EMAIL)).thenReturn(false);
+//     when(userService.isDuplicatedEmail(UNIQUE_USER_EMAIL)).thenReturn(false);
 //
 //        mockMvc.perform(get(USER_API_URI + "/duplicated/{email}", UNIQUE_USER_EMAIL))
 //            .andExpect(status().isOk())
