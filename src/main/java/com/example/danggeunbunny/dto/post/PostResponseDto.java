@@ -27,16 +27,6 @@ public class PostResponseDto {
     private LocalDateTime createdTime;
     private LocalDateTime modifiedTime;
 
-    private int totalPage;
-    private int currentPage;
-    private List<PostResponseDto> postResponses = new ArrayList<>();
-
-    @Builder
-    public PostResponseDto(int totalPage, int currentPage, List<PostResponseDto> postResponses) {
-        this.totalPage = totalPage;
-        this.currentPage = currentPage;
-        this.postResponses = postResponses;
-    }
 
     public static PostResponseDto of(Post post) {
         return PostResponseDto.builder()
