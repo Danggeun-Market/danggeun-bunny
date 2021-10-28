@@ -60,7 +60,7 @@ class PostServiceTest {
         user = User.builder()
                 .email("daangnmarket@admin.com")
                 .password("1q2w3e4r!")
-                .nickname("김당근")
+                .nickname("당근띠")
                 .build();
 
         post = postCreateRequestDto.toEntity(user);
