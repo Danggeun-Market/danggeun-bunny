@@ -14,7 +14,7 @@ import java.util.Arrays;
 @Component
 public class AreaInfoAspect {
 
-    @Before("@annotation(com.ssibongee.daangnmarket.commons.annotation.AreaInfoRequired)")
+    @Before("@annotation(com.example.danggeunbunny.annotation.AreaInfoRequired)")
     public void isValidAreaInfo(JoinPoint joinPoint) {
         User user = Arrays.stream(joinPoint.getArgs())
                 .filter(User.class::isInstance)
@@ -27,5 +27,7 @@ public class AreaInfoAspect {
             throw new AreaInfoNotDefinedException("지역 정보를 등록해주세요.");
         }
     }
+
+
 
 }
