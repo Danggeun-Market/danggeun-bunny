@@ -13,7 +13,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,11 +24,14 @@ public class TradePostSearchServiceImpl implements PostSearchService{
 
     @Override
     @AreaInfoRequired
-    public PostPageResponseDto findAllUserAddress(@Valid User user, Pageable pageable) {
+    public PostPageResponseDto findAllByUserAddress(User user, Pageable pageable) {
+        Address address = user.getAddress();
+        Page<Post> posts = postSearchRepository.findAllByUserAddress(address.getState(),address.getCity(), address.getTown(), pageable);
 
+        return getPostPageResponse(posts,pageable);
 
-        return getClass()
     }
+
 
     @Override
     public PostPageResponseDto findAllByAddress(AddressRequestDto address, Pageable pageable) {
@@ -44,4 +46,27 @@ public class TradePostSearchServiceImpl implements PostSearchService{
                 .postResponses(postResponseDtos)
                 .build();
     }
+
+    @Override
+    @AreaInfoRequired
+    public PostPageResponseDto findALlByCategory(String category, User user, Pageable pageable) {
+
+        Address address = user.getAddress();
+        Page<Post> posts = postSearchRepository.findAllByUserAddress(category, address.getCity(), address.getTown(), address.getState(), pageable);
+
+        return getPostPageResponse(posts, pageable);
+    }
+
+    private PostPageResponseDto getPostPageResponse(Page<Post> posts, Pageable pageable) {
+
+        List<PostResponseDto> postResponseDtos = posts.getContent().stream().map(PostResponseDto::of).collect(Collectors.toList());
+
+        return PostPageResponseDto.builder()
+                .totalPage(posts.getTotalPages())
+                .currentPage(pageable.getPageNumber())
+                .postResponses(postResponseDtos)
+                .build();
+    }
+
+
 }
