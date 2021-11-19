@@ -28,7 +28,7 @@ public class PostSearchController {
     @GetMapping
     public ResponseEntity<PostPageResponseDto> getTradePosts(@LoginUser User user, Pageable pageable) {
 
-        PostPageResponseDto page = tradePostSearchService.findAllUserAddress(user, pageable);
+        PostPageResponseDto page = tradePostSearchService.findAllByUserAddress(user, pageable);
 
         return ResponseEntity.ok(page);
     }
@@ -37,7 +37,7 @@ public class PostSearchController {
     @GetMapping("/address")
     public ResponseEntity<PostPageResponseDto> getTradePostsByAddress(@Valid User user, Pageable pageable) {
 
-        PostPageResponseDto page = tradePostSearchService.findAllUserAddress(user, pageable);
+        PostPageResponseDto page = tradePostSearchService.findAllByUserAddress(user, pageable);
 
         return ResponseEntity.ok(page);
 
