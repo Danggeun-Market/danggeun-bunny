@@ -1,16 +1,24 @@
 package com.example.danggeunbunny.util;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-public class HttpStatusResponseEntity {
+@Getter
+@AllArgsConstructor
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
+public enum HttpStatusResponseEntity {
 
-    public static final ResponseEntity<HttpStatus> RESPONSE_OK = ResponseEntity.status(HttpStatus.OK).build();
-    public static final ResponseEntity<HttpStatus> RESPONSE_CONFLICT = ResponseEntity.status(HttpStatus.CONFLICT).build();
-    public static final ResponseEntity<HttpStatus> RESPONSE_BAD_REQUEST = ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-    public static final ResponseEntity<HttpStatus> RESPONSE_NOT_FOUND = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-    public static final ResponseEntity<HttpStatus> RESPONSE_UNAUTHORIZED = ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-    public static final ResponseEntity<HttpStatus> RESPONSE_FORBIDDEN = ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-    public static final ResponseEntity<HttpStatus> RESPONSE_PAYLOAD_TOO_LARGE = ResponseEntity.status(HttpStatus.PAYLOAD_TOO_LARGE).build();
+    RESPONSE_OK(200, "Response Ok"),
+    RESPONSE_CONFLICT(409, "Response Conflict"),
+    RESPONSE_BAD_REQUEST(400, "Response Bad Request"),
+    RESPONSE_NOT_FOUND(404, "Response Not Found"),
+    RESPONSE_UNAUTHORIZED(401, "Response Unauthorized"),
+    RESPONSE_FORBIDDEN(403, "Response Forbidden");
+
+
+    private final int status;
+    private final String message;
+
 }
 
