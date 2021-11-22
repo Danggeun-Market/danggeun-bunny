@@ -6,15 +6,14 @@ import com.example.danggeunbunny.model.user.User;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.validation.Valid;
-
-
 @Service
 public interface PostSearchService {
 
-    public PostPageResponseDto findAllUserAddress(@Valid User user, Pageable pageable);
+    public PostPageResponseDto findAllByUserAddress( User user, Pageable pageable);
 
     public PostPageResponseDto findAllByAddress(AddressRequestDto address, Pageable pageable);
+
+    public PostPageResponseDto findALlByCategory(String category, User user, Pageable pageable);
 
 
 }

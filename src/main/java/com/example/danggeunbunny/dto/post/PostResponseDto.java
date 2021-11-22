@@ -3,16 +3,16 @@ package com.example.danggeunbunny.dto.post;
 import com.example.danggeunbunny.model.address.Address;
 import com.example.danggeunbunny.model.address.Location;
 import com.example.danggeunbunny.model.board.post.Post;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Builder
 @Getter
 public class PostResponseDto {
 
+    private Long id;
     private String title;
     private String author;
     private String email;
@@ -30,6 +30,7 @@ public class PostResponseDto {
 
     public static PostResponseDto of(Post post) {
         return PostResponseDto.builder()
+                .id(post.getId())
                 .title(post.getTitle())
                 .author(post.getAuthor().getNickname())
                 .email(post.getAuthor().getEmail())
@@ -41,5 +42,6 @@ public class PostResponseDto {
                 .address(post.getAddress())
                 .location(post.getLocation())
                 .build();
+
     }
 }

@@ -167,6 +167,7 @@ class PostServiceTest {
     void isUnAuthorizedMemberToRemovePost() {
         // given
         User user = mock(User.class);
+
         when(loginService.getLoginUser()).thenReturn(user);
 
         // then
@@ -174,4 +175,5 @@ class PostServiceTest {
             postService.removePost(post);
         });
     }
+
 }

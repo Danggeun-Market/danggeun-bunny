@@ -14,8 +14,8 @@ public enum HttpStatusResponseEntity {
     RESPONSE_BAD_REQUEST(400, "Response Bad Request"),
     RESPONSE_NOT_FOUND(404, "Response Not Found"),
     RESPONSE_UNAUTHORIZED(401, "Response Unauthorized"),
-    RESPONSE_FORBIDDEN(403, "Response Forbidden");
-
+    RESPONSE_FORBIDDEN(403, "Response Forbidden"),
+    ;
 
     private final int status;
     private final String message;

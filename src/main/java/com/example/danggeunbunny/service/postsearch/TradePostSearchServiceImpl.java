@@ -26,7 +26,7 @@ public class TradePostSearchServiceImpl implements PostSearchService{
     @AreaInfoRequired
     public PostPageResponseDto findAllByUserAddress(User user, Pageable pageable) {
         Address address = user.getAddress();
-        Page<Post> posts = postSearchRepository.findAllByUserAddress(address.getState(),address.getCity(), address.getTown(), pageable);
+        Page<Post> posts = postSearchRepository.findAllByUserAddress(address.getState(),address.getCity(), address.getTown(), address.getState(), pageable);
 
         return getPostPageResponse(posts,pageable);
 
@@ -36,7 +36,7 @@ public class TradePostSearchServiceImpl implements PostSearchService{
     @Override
     public PostPageResponseDto findAllByAddress(AddressRequestDto address, Pageable pageable) {
 
-        Page<Post> posts = postSearchRepository.findAllByUserAddress(address.getState(), address.getCity(), address.getCity(), pageable);
+        Page<Post> posts = postSearchRepository.findAllByUserAddress(address.getState(), address.getCity(), address.getCity(), address.getState(), pageable);
 
         List<PostResponseDto> postResponseDtos = posts.getContent().stream().map(PostResponseDto::of).collect(Collectors.toList());
 
@@ -67,6 +67,5 @@ public class TradePostSearchServiceImpl implements PostSearchService{
                 .postResponses(postResponseDtos)
                 .build();
     }
-
 
 }
