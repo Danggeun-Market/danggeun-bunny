@@ -4,7 +4,7 @@ import com.example.global.annotation.login.LoginRequired;
 import com.example.global.annotation.login.LoginUser;
 import com.example.danggeunbunny.domain.feed.presentation.dto.response.FeedPageResponse;
 import com.example.danggeunbunny.domain.user.domain.entity.User;
-import com.example.danggeunbunny.domain.postsearch.service.TradePostSearchServiceImpl;
+import com.example.danggeunbunny.domain.postsearch.service.FeedSearchServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +18,9 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/searches")
-public class PostSearchController {
+public class FeedController {
 
-    private final TradePostSearchServiceImpl tradePostSearchService;
+    private final FeedSearchServiceImpl tradePostSearchService;
 
     @LoginRequired
     @GetMapping

@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class TradePostSearchServiceImpl implements PostSearchService {
+public class FeedSearchServiceImpl implements FeedSearchService {
 
     private final PostSearchRepository postSearchRepository;
 
