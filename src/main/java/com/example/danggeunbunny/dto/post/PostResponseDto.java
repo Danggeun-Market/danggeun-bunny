@@ -3,7 +3,8 @@ package com.example.danggeunbunny.dto.post;
 import com.example.danggeunbunny.model.address.Address;
 import com.example.danggeunbunny.model.address.Location;
 import com.example.danggeunbunny.model.board.post.Post;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
@@ -26,6 +27,7 @@ public class PostResponseDto {
     private LocalDateTime createdTime;
     private LocalDateTime modifiedTime;
 
+
     public static PostResponseDto of(Post post) {
         return PostResponseDto.builder()
                 .id(post.getId())
@@ -40,5 +42,6 @@ public class PostResponseDto {
                 .address(post.getAddress())
                 .location(post.getLocation())
                 .build();
+
     }
 }

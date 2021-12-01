@@ -10,15 +10,13 @@ import com.example.danggeunbunny.dto.user.UserDto;
 import com.example.danggeunbunny.model.user.User;
 import com.example.danggeunbunny.service.login.LoginService;
 import com.example.danggeunbunny.service.user.UserService;
+import com.example.danggeunbunny.util.HttpStatusResponseEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import static com.example.danggeunbunny.util.HttpStatusResponseEntity.*;
@@ -41,7 +39,7 @@ public class UserController {
      * @return
      */
     @PostMapping
-    private ResponseEntity<HttpStatus> registration(@RequestBody @Valid UserDto userDto){
+    private HttpStatusResponseEntity registration(@RequestBody @Valid UserDto userDto){
 
         // 클라이언트에서 사용자 이메일 중복체크를 수행하지만 API요청에 의한 예외상황에 대비하여 더블체크
         boolean isDuplicated = userService.isDuplicatedEmail(userDto.getEmail());
@@ -63,7 +61,7 @@ public class UserController {
      * @return
      */
     @GetMapping("/duplicated/{email}")
-    public ResponseEntity<HttpStatus> isDuplicatedEmail(@PathVariable String email) {
+    public HttpStatusResponseEntity isDuplicatedEmail(@PathVariable String email) {
         boolean isDuplicated = userService.isDuplicatedEmail(email);
 
         if(isDuplicated) {
@@ -79,7 +77,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/login")
-    public ResponseEntity<HttpStatus> login(@RequestBody @Valid UserDto userDto) {
+    public HttpStatusResponseEntity login(@RequestBody @Valid UserDto userDto) {
 
         boolean isValidMember = userService.isValidUser(userDto, passwordEncoder);
 
@@ -98,7 +96,7 @@ public class UserController {
 
     @LoginRequired
     @GetMapping("/logout")
-    public ResponseEntity<HttpStatus> logout() {
+    public HttpStatusResponseEntity logout() {
         loginService.logout();
 
         return RESPONSE_OK;
@@ -137,7 +135,7 @@ public class UserController {
      */
     @LoginRequired
     @PutMapping("/password")
-    public ResponseEntity<HttpStatus> changePassword(@LoginUser User user, @Valid @RequestBody PasswordRequestDto passwordRequestDto) {
+    public HttpStatusResponseEntity changePassword(@LoginUser User user, @Valid @RequestBody PasswordRequestDto passwordRequestDto) {
 
         if (userService.isValidPassword(user, passwordRequestDto, passwordEncoder)) {
             userService.updateUserPassword(user, passwordRequestDto, passwordEncoder);
@@ -154,7 +152,7 @@ public class UserController {
      */
     @LoginRequired
     @PutMapping("/my-location")
-    public ResponseEntity<HttpStatus> setUserLocationAddress(@LoginUser User user, @RequestBody LocationRequestDto locationRequestDto) {
+    public HttpStatusResponseEntity setUserLocationAddress(@LoginUser User user, @RequestBody LocationRequestDto locationRequestDto) {
 
         userService.setUserLocationAddress(user, locationRequestDto);
 

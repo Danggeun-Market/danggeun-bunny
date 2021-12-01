@@ -2,9 +2,6 @@ plugins {
     id 'org.springframework.boot' version '2.5.5'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
-    id 'org.springframework.experimental.aot' version '0.10.4'
-    id 'org.graalvm.buildtools.native' version '0.9.3'
-    id 'org.hibernate.orm'
     id 'jacoco'
 }
 
@@ -34,16 +31,21 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     implementation group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.5.5'
     annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.5.5'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.5'
     implementation group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.5.5'
+    implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
 
-    // https://mvnrepository.com/artifact/com.h2database/h2
+    implementation group: 'com.github.docker-java', name: 'docker-java', version: '3.2.7'
     testImplementation group: 'com.h2database', name: 'h2', version: '1.4.200'
+    testImplementation group: 'org.springframework.restdocs', name: 'spring-restdocs-mockmvc', version: '2.0.4.RELEASE'
+    testImplementation group: 'com.jayway.restassured', name: 'spring-mock-mvc', version: '2.9.0'
+
 
     implementation group: 'org.springframework.security', name: 'spring-security-core', version: '5.5.2'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis', version: '2.5.5'
     implementation group: 'org.springframework.session', name: 'spring-session-data-redis', version: '2.5.1'
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.26'
 
     implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.12.3'
 
@@ -51,28 +53,6 @@ dependencies {
 
 test {
     useJUnitPlatform()
-}
-
-bootBuildImage {
-    builder = 'paketobuildpacks/builder:tiny'
-    environment = ['BP_NATIVE_IMAGE': 'true']
-}
-
-nativeBuild {
-    classpath processAotResources.outputs, compileAotJava.outputs
-}
-
-nativeTest {
-    classpath processAotTestResources.outputs, compileAotTestJava.outputs
-}
-
-hibernate {
-    enhance {
-        enableLazyInitialization = true
-        enableDirtyTracking = true
-        enableAssociationManagement = true
-        enableExtendedEnhancement = false
-    }
 }
 
 jacocoTestReport {

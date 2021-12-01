@@ -3,17 +3,14 @@ package com.example.danggeunbunny.dto.post;
 import com.example.danggeunbunny.model.board.post.Post;
 import com.example.danggeunbunny.model.board.post.TradeStatus;
 import com.example.danggeunbunny.model.user.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
 
 @Builder
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class PostCreateRequestDto {
 
