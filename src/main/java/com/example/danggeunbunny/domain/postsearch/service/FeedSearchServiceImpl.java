@@ -1,10 +1,10 @@
 package com.example.danggeunbunny.domain.postsearch.service;
 
-import com.example.global.annotation.area.AreaInfoRequired;
-import com.example.global.dto.location.AddressRequest;
+import com.example.danggeunbunny.global.annotation.area.AreaInfoRequired;
+import com.example.danggeunbunny.global.dto.location.AddressRequest;
 import com.example.danggeunbunny.domain.feed.presentation.dto.response.FeedPageResponse;
 import com.example.danggeunbunny.domain.feed.presentation.dto.response.FeedResponse;
-import com.example.global.domain.entity.address.Address;
+import com.example.danggeunbunny.global.domain.entity.address.Address;
 import com.example.danggeunbunny.domain.feed.domain.entity.Feed;
 import com.example.danggeunbunny.domain.user.domain.entity.User;
 import com.example.danggeunbunny.domain.postsearch.domain.repository.PostSearchRepository;

@@ -2,19 +2,19 @@ package com.example.danggeunbunny.domain.feed.presentation;
 
 import com.example.danggeunbunny.domain.feed.presentation.dto.request.FeedCreateRequest;
 import com.example.danggeunbunny.domain.feed.presentation.dto.response.FeedResponse;
-import com.example.global.annotation.login.LoginRequired;
-import com.example.global.annotation.login.LoginUser;
+import com.example.danggeunbunny.global.annotation.login.LoginRequired;
+import com.example.danggeunbunny.global.annotation.login.LoginUser;
 import com.example.danggeunbunny.domain.feed.domain.entity.Feed;
 import com.example.danggeunbunny.domain.user.domain.entity.User;
 import com.example.danggeunbunny.domain.feed.service.FeedService;
-import com.example.global.error.ErrorCode;
+import com.example.danggeunbunny.global.error.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-import static com.example.global.error.ErrorCode.RESPONSE_OK;
+import static com.example.danggeunbunny.global.error.ErrorCode.RESPONSE_OK;
 
 @RestController
 @RequiredArgsConstructor

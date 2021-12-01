@@ -1,7 +1,7 @@
 package com.example.danggeunbunny.domain.postsearch.presentation;
 
-import com.example.global.annotation.login.LoginRequired;
-import com.example.global.annotation.login.LoginUser;
+import com.example.danggeunbunny.global.annotation.login.LoginRequired;
+import com.example.danggeunbunny.global.annotation.login.LoginUser;
 import com.example.danggeunbunny.domain.feed.presentation.dto.response.FeedPageResponse;
 import com.example.danggeunbunny.domain.user.domain.entity.User;
 import com.example.danggeunbunny.domain.postsearch.service.FeedSearchServiceImpl;

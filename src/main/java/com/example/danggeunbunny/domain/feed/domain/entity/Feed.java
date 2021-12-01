@@ -2,9 +2,9 @@ package com.example.danggeunbunny.domain.feed.domain.entity;
 
 import com.example.danggeunbunny.domain.category.Category;
 import com.example.danggeunbunny.domain.feed.presentation.dto.request.FeedCreateRequest;
-import com.example.global.domain.entity.address.Address;
-import com.example.global.domain.entity.address.Location;
-import com.example.global.domain.repository.BaseTimeEntity;
+import com.example.danggeunbunny.global.domain.entity.address.Address;
+import com.example.danggeunbunny.global.domain.entity.address.Location;
+import com.example.danggeunbunny.global.domain.repository.BaseTimeEntity;
 import com.example.danggeunbunny.domain.user.domain.entity.User;
 import lombok.AccessLevel;
 import lombok.Builder;

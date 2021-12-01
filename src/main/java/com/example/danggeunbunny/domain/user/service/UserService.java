@@ -1,6 +1,6 @@
 package com.example.danggeunbunny.domain.user.service;
 
-import com.example.global.dto.location.LocationRequest;
+import com.example.danggeunbunny.global.dto.location.LocationRequest;
 import com.example.danggeunbunny.domain.user.presentation.dto.request.PasswordRequestDto;
 import com.example.danggeunbunny.domain.user.presentation.dto.request.ProfileRequestDto;
 import com.example.danggeunbunny.domain.user.presentation.dto.UserDto;

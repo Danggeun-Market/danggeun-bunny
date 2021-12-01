@@ -1,6 +1,6 @@
 package com.example.danggeunbunny.domain.feed.service;
 
-import com.example.global.annotation.area.AreaInfoRequired;
+import com.example.danggeunbunny.global.annotation.area.AreaInfoRequired;
 import com.example.danggeunbunny.domain.feed.presentation.dto.request.FeedCreateRequest;
 import com.example.danggeunbunny.domain.feed.exception.PostNotFoundException;
 import com.example.danggeunbunny.domain.user.exception.UnAuthorizedAccessException;

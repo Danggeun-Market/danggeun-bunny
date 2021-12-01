@@ -2,15 +2,15 @@ package com.example.danggeunbunny.domain.user.presentation;
 
 import com.example.danggeunbunny.domain.user.domain.entity.User;
 import com.example.danggeunbunny.domain.user.presentation.dto.UserDto;
-import com.example.global.annotation.login.LoginRequired;
-import com.example.global.annotation.login.LoginUser;
-import com.example.global.dto.location.LocationRequest;
+import com.example.danggeunbunny.global.annotation.login.LoginRequired;
+import com.example.danggeunbunny.global.annotation.login.LoginUser;
+import com.example.danggeunbunny.global.dto.location.LocationRequest;
 import com.example.danggeunbunny.domain.user.presentation.dto.request.PasswordRequestDto;
 import com.example.danggeunbunny.domain.user.presentation.dto.request.ProfileRequestDto;
 import com.example.danggeunbunny.domain.user.presentation.dto.request.ProfileResponseDto;
 import com.example.danggeunbunny.domain.login.service.LoginService;
 import com.example.danggeunbunny.domain.user.service.UserService;
-import com.example.global.error.ErrorCode;
+import com.example.danggeunbunny.global.error.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-import static com.example.global.error.ErrorCode.*;
+import static com.example.danggeunbunny.global.error.ErrorCode.*;
 
 @RestController
 @RequiredArgsConstructor
