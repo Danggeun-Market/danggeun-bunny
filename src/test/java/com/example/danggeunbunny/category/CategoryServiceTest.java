@@ -1,9 +1,9 @@
 package com.example.danggeunbunny.category;
 
-import com.example.danggeunbunny.exception.board.CategoryNotFoundException;
-import com.example.danggeunbunny.model.board.post.Category;
-import com.example.danggeunbunny.repository.category.CategoryRepository;
-import com.example.danggeunbunny.service.category.TradeCategoryService;
+import com.example.danggeunbunny.domain.Post.exception.CategoryNotFoundException;
+import com.example.danggeunbunny.domain.Post.domain.entity.Category;
+import com.example.danggeunbunny.domain.category.domain.repository.CategoryRepository;
+import com.example.danggeunbunny.domain.category.service.TradeCategoryService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

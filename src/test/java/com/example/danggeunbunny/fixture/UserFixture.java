@@ -1,7 +1,7 @@
 package com.example.danggeunbunny.fixture;
 
-import com.example.danggeunbunny.dto.user.UserDto;
-import com.example.danggeunbunny.model.user.User;
+import com.example.danggeunbunny.domain.user.presentation.dto.UserDto;
+import com.example.danggeunbunny.domain.user.domain.entity.User;
 
 public class UserFixture {
 
