@@ -1,4 +1,4 @@
-package com.example.danggeunbunny.global.dto.location;
+package com.example.danggeunbunny.global.dto.Request;
 
 import com.example.danggeunbunny.global.domain.entity.address.Address;
 import com.example.danggeunbunny.global.domain.entity.address.Location;

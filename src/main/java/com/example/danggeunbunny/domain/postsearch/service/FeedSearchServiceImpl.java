@@ -1,7 +1,7 @@
 package com.example.danggeunbunny.domain.postsearch.service;
 
 import com.example.danggeunbunny.global.annotation.area.AreaInfoRequired;
-import com.example.danggeunbunny.global.dto.location.AddressRequest;
+import com.example.danggeunbunny.global.dto.Request.AddressRequest;
 import com.example.danggeunbunny.domain.feed.presentation.dto.response.FeedPageResponse;
 import com.example.danggeunbunny.domain.feed.presentation.dto.response.FeedResponse;
 import com.example.danggeunbunny.global.domain.entity.address.Address;

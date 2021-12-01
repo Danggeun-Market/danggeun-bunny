@@ -1,6 +1,6 @@
 package com.example.danggeunbunny.domain.user.domain.entity;
 
-import com.example.danggeunbunny.global.dto.location.LocationRequest;
+import com.example.danggeunbunny.global.dto.Request.LocationRequest;
 import com.example.danggeunbunny.global.domain.entity.address.Address;
 import com.example.danggeunbunny.global.domain.entity.address.Location;
 import lombok.*;

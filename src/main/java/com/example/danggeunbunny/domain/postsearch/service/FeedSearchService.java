@@ -1,6 +1,6 @@
 package com.example.danggeunbunny.domain.postsearch.service;
 
-import com.example.danggeunbunny.global.dto.location.AddressRequest;
+import com.example.danggeunbunny.global.dto.Request.AddressRequest;
 import com.example.danggeunbunny.domain.feed.presentation.dto.response.FeedPageResponse;
 import com.example.danggeunbunny.domain.user.domain.entity.User;
 import org.springframework.data.domain.Pageable;
