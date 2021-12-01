@@ -1,4 +1,4 @@
-package com.example.global.config.cache;
+package com.example.global.cache;
 
 import java.time.Duration;
 

@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import static com.example.global.config.cache.CacheKeyConfig.CATEGORY;
+import static com.example.global.cache.CacheKeyConfig.CATEGORY;
 
 @Service
 @RequiredArgsConstructor

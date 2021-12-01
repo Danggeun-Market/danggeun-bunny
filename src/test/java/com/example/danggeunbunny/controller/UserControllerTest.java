@@ -2,7 +2,6 @@ package com.example.danggeunbunny.controller;
 
 import com.example.danggeunbunny.domain.user.presentation.UserController;
 import com.example.danggeunbunny.domain.user.presentation.dto.UserDto;
-import com.example.danggeunbunny.domain.login.service.LoginService;
 import com.example.danggeunbunny.domain.user.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,7 +22,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static com.example.danggeunbunny.domain.user.presentation.UserController.USER_API_URI;
-import static com.example.danggeunbunny.fixture.UserFixture.*;
+import static com.example.danggeunbunny.fixture.UserFixture.USER_REGISTRATION_REQUEST;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -42,9 +41,6 @@ public class UserControllerTest {
     @MockBean
     private UserService userService;
 
-
-    @MockBean
-    private LoginService loginService;
 
     @MockBean
     private PasswordEncoder passwordEncoder;

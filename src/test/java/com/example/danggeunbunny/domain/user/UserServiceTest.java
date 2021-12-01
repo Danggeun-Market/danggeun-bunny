@@ -1,7 +1,7 @@
 package com.example.danggeunbunny.domain.user;
 
-import com.example.danggeunbunny.domain.user.service.GeneralUserServiceImpl;
-import com.example.global.dto.location.LocationRequestDto;
+import com.example.danggeunbunny.domain.user.service.UserServiceImpl;
+import com.example.global.dto.location.LocationRequest;
 import com.example.danggeunbunny.domain.user.presentation.dto.request.PasswordRequestDto;
 import com.example.danggeunbunny.domain.user.presentation.dto.request.ProfileRequestDto;
 import com.example.danggeunbunny.domain.user.presentation.dto.UserDto;
@@ -28,7 +28,7 @@ import static org.mockito.Mockito.when;
 class UserServiceTest {
 
     @InjectMocks
-    private GeneralUserServiceImpl generalUserService;
+    private UserServiceImpl generalUserService;
 
     @Mock
     private UserRepository userRepository;
@@ -44,7 +44,7 @@ class UserServiceTest {
 
     private ProfileRequestDto profileRequestDto;
 
-    private LocationRequestDto locationRequestDto;
+    private LocationRequest locationRequestDto;
 
     @BeforeEach
     void setUp() {
@@ -59,7 +59,7 @@ class UserServiceTest {
 
         profileRequestDto = new ProfileRequestDto("lyutvs@gmail.com", "엄청난노옴");
 
-        locationRequestDto = LocationRequestDto.builder()
+        locationRequestDto = LocationRequest.builder()
                 .state("대전광역시")
                 .city("유성구")
                 .town("중구")

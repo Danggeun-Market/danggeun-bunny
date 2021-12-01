@@ -1,6 +1,6 @@
 package com.example.danggeunbunny.domain.user.service;
 
-import com.example.global.dto.location.LocationRequestDto;
+import com.example.global.dto.location.LocationRequest;
 import com.example.danggeunbunny.domain.user.presentation.dto.request.PasswordRequestDto;
 import com.example.danggeunbunny.domain.user.presentation.dto.request.ProfileRequestDto;
 import com.example.danggeunbunny.domain.user.presentation.dto.UserDto;
@@ -17,8 +17,6 @@ import org.springframework.stereotype.Service;
 
      User findUserByEmail(String email);
 
-     User findUserById(long id);
-
      boolean isValidUser(UserDto memberDto, PasswordEncoder passwordEncoder);
 
      boolean isValidPassword(User user, PasswordRequestDto passwordRequestDto, PasswordEncoder passwordEncoder);
@@ -27,8 +25,6 @@ import org.springframework.stereotype.Service;
 
      void updateUserPassword(User user, PasswordRequestDto passwordRequestDto, PasswordEncoder passwordEncoder);
 
-     void setUserLocationAddress(User user, LocationRequestDto locationRequestDto);
-
-
+     void setUserLocationAddress(User user, LocationRequest locationRequestDto);
 
 }

@@ -1,7 +1,7 @@
 package com.example.danggeunbunny.domain.postsearch.service;
 
 import com.example.global.annotation.area.AreaInfoRequired;
-import com.example.global.dto.location.AddressRequestDto;
+import com.example.global.dto.location.AddressRequest;
 import com.example.danggeunbunny.domain.feed.presentation.dto.response.FeedPageResponse;
 import com.example.danggeunbunny.domain.feed.presentation.dto.response.FeedResponse;
 import com.example.global.domain.entity.address.Address;
@@ -34,7 +34,7 @@ public class FeedSearchServiceImpl implements FeedSearchService {
 
 
     @Override
-    public FeedPageResponse findAllByAddress(AddressRequestDto address, Pageable pageable) {
+    public FeedPageResponse findAllByAddress(AddressRequest address, Pageable pageable) {
 
         Page<Feed> posts = postSearchRepository.findAllByUserAddress(address.getState(), address.getCity(), address.getCity(), address.getState(), pageable);
 

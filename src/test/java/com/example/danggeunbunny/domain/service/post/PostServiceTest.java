@@ -37,8 +37,7 @@ class PostServiceTest {
     @Mock
     private CategoryService categoryService;
 
-    @Mock
-    private LoginService loginService;
+    @MocknService
 
     private User user;
 

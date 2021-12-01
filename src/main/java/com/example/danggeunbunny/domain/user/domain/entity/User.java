@@ -1,6 +1,6 @@
 package com.example.danggeunbunny.domain.user.domain.entity;
 
-import com.example.global.dto.location.LocationRequestDto;
+import com.example.global.dto.location.LocationRequest;
 import com.example.global.domain.entity.address.Address;
 import com.example.global.domain.entity.address.Location;
 import lombok.*;
@@ -47,7 +47,7 @@ public class User {
         this.password = password;
     }
 
-    public void setUserLocationAddress(LocationRequestDto locationAddress) {
+    public void setUserLocationAddress(LocationRequest locationAddress) {
         this.address = locationAddress.toAddress();
         this.location = locationAddress.toLocation();
     }

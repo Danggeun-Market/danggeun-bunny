@@ -1,6 +1,6 @@
 package com.example.danggeunbunny.domain.user.service;
 
-import com.example.global.dto.location.LocationRequestDto;
+import com.example.global.dto.location.LocationRequest;
 import com.example.danggeunbunny.domain.user.presentation.dto.request.PasswordRequestDto;
 import com.example.danggeunbunny.domain.user.presentation.dto.request.ProfileRequestDto;
 import com.example.danggeunbunny.domain.user.presentation.dto.UserDto;
@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class GeneralUserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
@@ -77,7 +77,7 @@ public class GeneralUserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void setUserLocationAddress(User user, LocationRequestDto locationRequestDto) {
+    public void setUserLocationAddress(User user, LocationRequest locationRequestDto) {
         user.setUserLocationAddress(locationRequestDto);
 
     }

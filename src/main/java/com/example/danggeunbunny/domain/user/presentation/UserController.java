@@ -4,7 +4,7 @@ import com.example.danggeunbunny.domain.user.domain.entity.User;
 import com.example.danggeunbunny.domain.user.presentation.dto.UserDto;
 import com.example.global.annotation.login.LoginRequired;
 import com.example.global.annotation.login.LoginUser;
-import com.example.global.dto.location.LocationRequestDto;
+import com.example.global.dto.location.LocationRequest;
 import com.example.danggeunbunny.domain.user.presentation.dto.request.PasswordRequestDto;
 import com.example.danggeunbunny.domain.user.presentation.dto.request.ProfileRequestDto;
 import com.example.danggeunbunny.domain.user.presentation.dto.request.ProfileResponseDto;
@@ -152,7 +152,7 @@ public class UserController {
      */
     @LoginRequired
     @PutMapping("/my-location")
-    public ErrorCode setUserLocationAddress(@LoginUser User user, @RequestBody LocationRequestDto locationRequestDto) {
+    public ErrorCode setUserLocationAddress(@LoginUser User user, @RequestBody LocationRequest locationRequestDto) {
 
         userService.setUserLocationAddress(user, locationRequestDto);
 

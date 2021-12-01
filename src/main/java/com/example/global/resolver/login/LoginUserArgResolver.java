@@ -12,7 +12,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 @RequiredArgsConstructor
 @Component
-public class LoginMemberArgResolver implements HandlerMethodArgumentResolver {
+public class LoginUserArgResolver implements HandlerMethodArgumentResolver {
 
     private final LoginService loginService;
 
