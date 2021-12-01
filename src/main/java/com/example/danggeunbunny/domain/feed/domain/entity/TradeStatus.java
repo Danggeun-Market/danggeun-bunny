@@ -1,4 +1,4 @@
-package com.example.danggeunbunny.domain.Post.domain.entity;
+package com.example.danggeunbunny.domain.feed.domain.entity;
 
 public enum TradeStatus {
     SALE("판매중"),

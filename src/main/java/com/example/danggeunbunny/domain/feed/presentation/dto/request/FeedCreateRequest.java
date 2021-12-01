@@ -1,7 +1,7 @@
-package com.example.danggeunbunny.domain.Post.presentation.dto.request;
+package com.example.danggeunbunny.domain.feed.presentation.dto.request;
 
-import com.example.danggeunbunny.domain.Post.domain.entity.Post;
-import com.example.danggeunbunny.domain.Post.domain.entity.TradeStatus;
+import com.example.danggeunbunny.domain.feed.domain.entity.Feed;
+import com.example.danggeunbunny.domain.feed.domain.entity.TradeStatus;
 import com.example.danggeunbunny.domain.user.domain.entity.User;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
@@ -12,7 +12,7 @@ import javax.validation.constraints.NotEmpty;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class PostCreateRequest {
+public class FeedCreateRequest {
 
     @NotEmpty
     @Length(max = 100, message = "제목은 최대 100글자를 넘을 수 없습니다.")
@@ -24,8 +24,8 @@ public class PostCreateRequest {
     @NotEmpty
     private String category;
 
-    public Post toEntity(User user) {
-        return Post.builder()
+    public Feed toEntity(User user) {
+        return Feed.builder()
                 .title(this.title)
                 .content(this.content)
                 .author(user)

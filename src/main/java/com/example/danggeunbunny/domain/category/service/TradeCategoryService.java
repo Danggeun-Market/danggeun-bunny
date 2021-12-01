@@ -1,7 +1,7 @@
 package com.example.danggeunbunny.domain.category.service;
 
-import com.example.danggeunbunny.domain.Post.exception.CategoryNotFoundException;
-import com.example.danggeunbunny.domain.Post.domain.entity.Category;
+import com.example.danggeunbunny.domain.feed.exception.CategoryNotFoundException;
+import com.example.danggeunbunny.domain.category.Category;
 import com.example.danggeunbunny.domain.category.domain.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;

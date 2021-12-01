@@ -1,12 +1,12 @@
-package com.example.danggeunbunny.domain.Post.presentation;
+package com.example.danggeunbunny.domain.feed.presentation;
 
-import com.example.danggeunbunny.domain.Post.presentation.dto.request.PostCreateRequest;
-import com.example.danggeunbunny.domain.Post.presentation.dto.response.PostResponse;
+import com.example.danggeunbunny.domain.feed.presentation.dto.request.FeedCreateRequest;
+import com.example.danggeunbunny.domain.feed.presentation.dto.response.FeedResponse;
 import com.example.global.annotation.login.LoginRequired;
 import com.example.global.annotation.login.LoginUser;
-import com.example.danggeunbunny.domain.Post.domain.entity.Post;
+import com.example.danggeunbunny.domain.feed.domain.entity.Feed;
 import com.example.danggeunbunny.domain.user.domain.entity.User;
-import com.example.danggeunbunny.domain.Post.service.PostService;
+import com.example.danggeunbunny.domain.feed.service.FeedService;
 import com.example.global.error.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +19,9 @@ import static com.example.global.error.ErrorCode.RESPONSE_OK;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/posts")
-public class PostController {
+class FeedController {
 
-    private final PostService postService;
+    private final FeedService postService;
     private final ErrorCode httpStatusResponseEntity;
 
     /**
@@ -32,7 +32,7 @@ public class PostController {
      */
     @LoginRequired
     @PostMapping
-    public ErrorCode creatPost(@RequestBody @Valid PostCreateRequest postCreateRequestDto, @LoginUser User user) {
+    public ErrorCode creatPost(@RequestBody @Valid FeedCreateRequest postCreateRequestDto, @LoginUser User user) {
 
         postService.createNewPost(postCreateRequestDto, user);
 
@@ -41,16 +41,16 @@ public class PostController {
 
     @LoginRequired
     @GetMapping("/{postId}")
-    public ResponseEntity<PostResponse> findPost(@PathVariable Long postId) {
+    public ResponseEntity<FeedResponse> findPost(@PathVariable Long postId) {
 
-        return ResponseEntity.ok(PostResponse.of(postService.findPostById(postId)));
+        return ResponseEntity.ok(FeedResponse.of(postService.findPostById(postId)));
     }
 
     @LoginRequired
     @PutMapping("/{postId}")
-    public ErrorCode updatePost(@Valid @RequestBody PostCreateRequest postCreateRequestDto, @PathVariable Long postId) {
+    public ErrorCode updatePost(@Valid @RequestBody FeedCreateRequest postCreateRequestDto, @PathVariable Long postId) {
 
-        Post post = postService.findPostById(postId);
+        Feed post = postService.findPostById(postId);
 
 
         postService.updatePost(post, postCreateRequestDto);
@@ -62,7 +62,7 @@ public class PostController {
     @DeleteMapping("/{postId}")
     public ErrorCode deletePost(@PathVariable Long postId) {
 
-        Post post = postService.findPostById(postId);
+        Feed post = postService.findPostById(postId);
 
         postService.removePost(post);
         return RESPONSE_OK;

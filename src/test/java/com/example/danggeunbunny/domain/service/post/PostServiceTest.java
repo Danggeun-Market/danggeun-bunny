@@ -1,13 +1,13 @@
 package com.example.danggeunbunny.domain.service.post;
 
-import com.example.danggeunbunny.domain.Post.presentation.dto.request.PostCreateRequest;
-import com.example.danggeunbunny.domain.Post.exception.PostNotFoundException;
+import com.example.danggeunbunny.domain.feed.presentation.dto.request.FeedCreateRequest;
+import com.example.danggeunbunny.domain.feed.exception.PostNotFoundException;
 import com.example.danggeunbunny.domain.user.exception.UnAuthorizedAccessException;
-import com.example.danggeunbunny.domain.Post.domain.entity.Category;
-import com.example.danggeunbunny.domain.Post.domain.entity.Post;
+import com.example.danggeunbunny.domain.category.Category;
+import com.example.danggeunbunny.domain.feed.domain.entity.Feed;
 import com.example.danggeunbunny.domain.user.domain.entity.User;
-import com.example.danggeunbunny.domain.Post.domain.repository.PostRepository;
-import com.example.danggeunbunny.domain.Post.service.TradePostServiceImpl;
+import com.example.danggeunbunny.domain.feed.domain.repository.FeedRepository;
+import com.example.danggeunbunny.domain.feed.service.FeedServiceImpl;
 import com.example.danggeunbunny.domain.category.service.CategoryService;
 import com.example.danggeunbunny.domain.login.service.LoginService;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,10 +29,10 @@ import static org.mockito.Mockito.*;
 class PostServiceTest {
 
     @InjectMocks
-    private TradePostServiceImpl postService;
+    private FeedServiceImpl postService;
 
     @Mock
-    private PostRepository postRepository;
+    private FeedRepository postRepository;
 
     @Mock
     private CategoryService categoryService;
@@ -42,16 +42,16 @@ class PostServiceTest {
 
     private User user;
 
-    private Post post;
+    private Feed post;
 
     private Category category;
 
-    private PostCreateRequest postCreateRequestDto;
+    private FeedCreateRequest postCreateRequestDto;
 
     @BeforeEach
     void setUp() {
 
-        postCreateRequestDto = PostCreateRequest.builder()
+        postCreateRequestDto = FeedCreateRequest.builder()
                 .title("노트북 맥북 프로 16인치 판매합니다.")
                 .content("노트북을 파는 글")
                 .category("디지털/가전")
@@ -77,7 +77,7 @@ class PostServiceTest {
         postService.createNewPost(postCreateRequestDto, user);
 
         // then
-        verify(postRepository, times(1)).save(any(Post.class));
+        verify(postRepository, times(1)).save(any(Feed.class));
         verify(categoryService, times(1)).findCategoryByName(anyString());
     }
 
@@ -91,7 +91,7 @@ class PostServiceTest {
         // then
         assertThrows(PostNotFoundException.class, () -> {
 
-            Post findByPostId = postService.findPostById(1L);
+            Feed findByPostId = postService.findPostById(1L);
         });
     }
 
@@ -103,7 +103,7 @@ class PostServiceTest {
         when(postRepository.findPostById(any())).   thenReturn(Optional.of(post));
 
         // when
-        Post findByPostId = postService.findPostById(post.getId());
+        Feed findByPostId = postService.findPostById(post.getId());
 
         // then
         assertThat(findByPostId).isNotNull();
@@ -118,7 +118,7 @@ class PostServiceTest {
         void successToUpdatePost() {
 
         // given
-        Post post = mock(Post.class);
+        Feed post = mock(Feed.class);
         when(post.getAuthor()).thenReturn(user);
         when(categoryService.findCategoryByName(any())).thenReturn(category);
         when(loginService.getLoginUser()).thenReturn(user);
@@ -150,7 +150,7 @@ class PostServiceTest {
     void successToRemovePost() {
 
         // given
-        Post post = mock(Post.class);
+        Feed post = mock(Feed.class);
 
         // when
         postService.removePost(post);

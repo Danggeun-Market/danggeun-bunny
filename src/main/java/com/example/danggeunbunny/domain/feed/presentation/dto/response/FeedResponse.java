@@ -1,8 +1,8 @@
-package com.example.danggeunbunny.domain.Post.presentation.dto.response;
+package com.example.danggeunbunny.domain.feed.presentation.dto.response;
 
 import com.example.global.domain.entity.address.Address;
 import com.example.global.domain.entity.address.Location;
-import com.example.danggeunbunny.domain.Post.domain.entity.Post;
+import com.example.danggeunbunny.domain.feed.domain.entity.Feed;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Builder
 @Getter
-public class PostResponse {
+public class FeedResponse {
 
     private Long id;
     private String title;
@@ -28,8 +28,8 @@ public class PostResponse {
     private LocalDateTime modifiedTime;
 
 
-    public static PostResponse of(Post post) {
-        return PostResponse.builder()
+    public static FeedResponse of(Feed post) {
+        return FeedResponse.builder()
                 .id(post.getId())
                 .title(post.getTitle())
                 .author(post.getAuthor().getNickname())

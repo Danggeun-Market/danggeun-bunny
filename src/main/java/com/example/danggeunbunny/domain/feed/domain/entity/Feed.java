@@ -1,6 +1,7 @@
-package com.example.danggeunbunny.domain.Post.domain.entity;
+package com.example.danggeunbunny.domain.feed.domain.entity;
 
-import com.example.danggeunbunny.domain.Post.presentation.dto.request.PostCreateRequest;
+import com.example.danggeunbunny.domain.category.Category;
+import com.example.danggeunbunny.domain.feed.presentation.dto.request.FeedCreateRequest;
 import com.example.global.domain.entity.address.Address;
 import com.example.global.domain.entity.address.Location;
 import com.example.global.domain.repository.BaseTimeEntity;
@@ -16,7 +17,7 @@ import java.time.LocalDateTime;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Post extends BaseTimeEntity {
+public class Feed extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,7 +50,7 @@ public class Post extends BaseTimeEntity {
     private boolean isRemoved = false;
 
     @Builder
-    public Post(String title, TradeStatus status, User author,
+    public Feed(String title, TradeStatus status, User author,
                 String content, Address address, Location location) {
         this.title = title;
         this.status = status;
@@ -60,7 +61,7 @@ public class Post extends BaseTimeEntity {
     }
 
     @Builder
-    public Post(Long id, String title, Category category, TradeStatus status,
+    public Feed(Long id, String title, Category category, TradeStatus status,
                 User author, String content, Address address, Location location,
                 LocalDateTime createdTime, LocalDateTime modifiedTime) {
         this.id = id;
@@ -80,7 +81,7 @@ public class Post extends BaseTimeEntity {
         this.category = category;
     }
 
-    public void updatePost(PostCreateRequest postCreateRequestDto) {
+    public void updatePost(FeedCreateRequest postCreateRequestDto) {
         this.title = postCreateRequestDto.getTitle();
         this.content = postCreateRequestDto.getContent();
     }

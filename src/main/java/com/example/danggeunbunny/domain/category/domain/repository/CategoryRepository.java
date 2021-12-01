@@ -1,6 +1,6 @@
 package com.example.danggeunbunny.domain.category.domain.repository;
 
-import com.example.danggeunbunny.domain.Post.domain.entity.Category;
+import com.example.danggeunbunny.domain.category.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

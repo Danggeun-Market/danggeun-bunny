@@ -1,6 +1,6 @@
 package com.example.global.aop;
 
-import com.example.danggeunbunny.domain.Post.exception.AreaInfoNotDefinedException;
+import com.example.danggeunbunny.domain.feed.exception.AreaInfoNotDefinedException;
 import com.example.danggeunbunny.domain.user.exception.UserNotFoundException;
 import com.example.danggeunbunny.domain.user.domain.entity.User;
 import org.aspectj.lang.JoinPoint;

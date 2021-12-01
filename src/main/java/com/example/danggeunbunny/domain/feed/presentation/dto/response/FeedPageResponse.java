@@ -1,4 +1,4 @@
-package com.example.danggeunbunny.domain.Post.presentation.dto.response;
+package com.example.danggeunbunny.domain.feed.presentation.dto.response;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -11,13 +11,13 @@ import java.util.List;
 @Builder
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class PostPageResponseDto {
+public class FeedPageResponse {
 
     private int totalPage;
     private int currentPage;
-    private List<PostResponse> postResponses = new ArrayList<>();
+    private List<FeedResponse> postResponses = new ArrayList<>();
 
-    public PostPageResponseDto(int totalPage, int currentPage, List<PostResponse> postResponses) {
+    public FeedPageResponse(int totalPage, int currentPage, List<FeedResponse> postResponses) {
         this.totalPage = totalPage;
         this.currentPage = currentPage;
         this.postResponses = postResponses;

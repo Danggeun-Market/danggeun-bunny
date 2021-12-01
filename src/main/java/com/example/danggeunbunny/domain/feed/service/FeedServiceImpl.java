@@ -1,13 +1,13 @@
-package com.example.danggeunbunny.domain.Post.service;
+package com.example.danggeunbunny.domain.feed.service;
 
 import com.example.global.annotation.area.AreaInfoRequired;
-import com.example.danggeunbunny.domain.Post.presentation.dto.request.PostCreateRequest;
-import com.example.danggeunbunny.domain.Post.exception.PostNotFoundException;
+import com.example.danggeunbunny.domain.feed.presentation.dto.request.FeedCreateRequest;
+import com.example.danggeunbunny.domain.feed.exception.PostNotFoundException;
 import com.example.danggeunbunny.domain.user.exception.UnAuthorizedAccessException;
-import com.example.danggeunbunny.domain.Post.domain.entity.Category;
-import com.example.danggeunbunny.domain.Post.domain.entity.Post;
+import com.example.danggeunbunny.domain.category.Category;
+import com.example.danggeunbunny.domain.feed.domain.entity.Feed;
 import com.example.danggeunbunny.domain.user.domain.entity.User;
-import com.example.danggeunbunny.domain.Post.domain.repository.PostRepository;
+import com.example.danggeunbunny.domain.feed.domain.repository.FeedRepository;
 import com.example.danggeunbunny.domain.category.service.CategoryService;
 import com.example.danggeunbunny.domain.login.service.LoginService;
 import lombok.RequiredArgsConstructor;
@@ -16,9 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class TradePostServiceImpl implements PostService {
+public class FeedServiceImpl implements FeedService {
 
-    private final PostRepository postRepository;
+    private final FeedRepository postRepository;
     private final CategoryService categoryService;
     private final LoginService loginService;
 
@@ -26,9 +26,9 @@ public class TradePostServiceImpl implements PostService {
     @Override
     @AreaInfoRequired
     @Transactional
-    public void createNewPost(PostCreateRequest postCreateRequestDto, User user) {
+    public void createNewPost(FeedCreateRequest postCreateRequestDto, User user) {
 
-        Post post = postCreateRequestDto.toEntity(user);
+        Feed post = postCreateRequestDto.toEntity(user);
         Category category = categoryService.findCategoryByName(postCreateRequestDto.getCategory());
 
         post.setCategory(category);
@@ -38,14 +38,14 @@ public class TradePostServiceImpl implements PostService {
     }
 
     @Override
-    public Post findPostById(Long postId) {
+    public Feed findPostById(Long postId) {
 
         return postRepository.findPostById(postId).orElseThrow(PostNotFoundException::new);
     }
 
     @Override
     @Transactional
-    public void updatePost(Post post, PostCreateRequest postCreateRequestDto) {
+    public void updatePost(Feed post, FeedCreateRequest postCreateRequestDto) {
 
         if (isMatchedAuthor(post)) {
             Category category = categoryService.findCategoryByName(postCreateRequestDto.getCategory());
@@ -60,7 +60,7 @@ public class TradePostServiceImpl implements PostService {
 
     @Override
     @Transactional
-    public void removePost(Post post) {
+    public void removePost(Feed post) {
 
         if(isMatchedAuthor(post)) {
             post.removedPost();
@@ -69,7 +69,7 @@ public class TradePostServiceImpl implements PostService {
     }
 
     @Override
-    public boolean isMatchedAuthor(Post post) {
+    public boolean isMatchedAuthor(Feed post) {
 
         User user = loginService.getLoginUser();
 

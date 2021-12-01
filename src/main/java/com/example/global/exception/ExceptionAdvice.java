@@ -1,8 +1,8 @@
 package com.example.global.exception;
 
-import com.example.danggeunbunny.domain.Post.exception.AreaInfoNotDefinedException;
-import com.example.danggeunbunny.domain.Post.exception.CategoryNotFoundException;
-import com.example.danggeunbunny.domain.Post.exception.PostNotFoundException;
+import com.example.danggeunbunny.domain.feed.exception.AreaInfoNotDefinedException;
+import com.example.danggeunbunny.domain.feed.exception.CategoryNotFoundException;
+import com.example.danggeunbunny.domain.feed.exception.PostNotFoundException;
 import com.example.danggeunbunny.domain.user.exception.UnAuthorizedAccessException;
 import com.example.danggeunbunny.domain.user.exception.UserNotFoundException;
 import com.example.global.error.ErrorCode;

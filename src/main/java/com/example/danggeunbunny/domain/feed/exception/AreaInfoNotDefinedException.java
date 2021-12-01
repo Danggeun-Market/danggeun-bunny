@@ -1,4 +1,4 @@
-package com.example.danggeunbunny.domain.Post.exception;
+package com.example.danggeunbunny.domain.feed.exception;
 
 public class AreaInfoNotDefinedException extends RuntimeException {
 

@@ -1,7 +1,7 @@
 package com.example.danggeunbunny.category;
 
-import com.example.danggeunbunny.domain.Post.exception.CategoryNotFoundException;
-import com.example.danggeunbunny.domain.Post.domain.entity.Category;
+import com.example.danggeunbunny.domain.feed.exception.CategoryNotFoundException;
+import com.example.danggeunbunny.domain.category.Category;
 import com.example.danggeunbunny.domain.category.domain.repository.CategoryRepository;
 import com.example.danggeunbunny.domain.category.service.TradeCategoryService;
 import org.junit.jupiter.api.DisplayName;

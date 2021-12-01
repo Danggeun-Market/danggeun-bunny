@@ -1,6 +1,6 @@
 package com.example.danggeunbunny.domain.category.service;
 
-import com.example.danggeunbunny.domain.Post.domain.entity.Category;
+import com.example.danggeunbunny.domain.category.Category;
 
 public interface CategoryService {
 

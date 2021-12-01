@@ -1,4 +1,4 @@
-package com.example.danggeunbunny.domain.Post.domain.entity;
+package com.example.danggeunbunny.domain.category;
 
 import lombok.AccessLevel;
 import lombok.Getter;

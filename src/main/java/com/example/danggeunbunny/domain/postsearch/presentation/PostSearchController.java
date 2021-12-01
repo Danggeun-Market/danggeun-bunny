@@ -2,7 +2,7 @@ package com.example.danggeunbunny.domain.postsearch.presentation;
 
 import com.example.global.annotation.login.LoginRequired;
 import com.example.global.annotation.login.LoginUser;
-import com.example.danggeunbunny.domain.Post.presentation.dto.response.PostPageResponse;
+import com.example.danggeunbunny.domain.feed.presentation.dto.response.FeedPageResponse;
 import com.example.danggeunbunny.domain.user.domain.entity.User;
 import com.example.danggeunbunny.domain.postsearch.service.TradePostSearchServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -24,18 +24,18 @@ public class PostSearchController {
 
     @LoginRequired
     @GetMapping
-    public ResponseEntity<PostPageResponse> getTradePosts(@LoginUser User user, Pageable pageable) {
+    public ResponseEntity<FeedPageResponse> getTradePosts(@LoginUser User user, Pageable pageable) {
 
-        PostPageResponse page = tradePostSearchService.findAllByUserAddress(user, pageable);
+        FeedPageResponse page = tradePostSearchService.findAllByUserAddress(user, pageable);
 
         return ResponseEntity.ok(page);
     }
 
     @LoginRequired
     @GetMapping("/address")
-    public ResponseEntity<PostPageResponse> getTradePostsByAddress(@Valid User user, Pageable pageable) {
+    public ResponseEntity<FeedPageResponse> getTradePostsByAddress(@Valid User user, Pageable pageable) {
 
-        PostPageResponse page = tradePostSearchService.findAllByUserAddress(user, pageable);
+        FeedPageResponse page = tradePostSearchService.findAllByUserAddress(user, pageable);
 
         return ResponseEntity.ok(page);
 
