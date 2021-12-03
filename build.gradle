@@ -34,6 +34,7 @@ dependencies {
     testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.5.5'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.5'
     testImplementation group: 'org.springframework.restdocs', name: 'spring-restdocs-mockmvc', version: '2.0.4.RELEASE'
+    runtimeOnly 'mysql:mysql-connector-java'
     testImplementation group: 'com.jayway.restassured', name: 'spring-mock-mvc', version: '2.9.0'
     implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
     implementation group: 'org.springframework.security', name: 'spring-security-core', version: '5.5.2'
