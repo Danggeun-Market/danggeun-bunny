@@ -1,7 +1,7 @@
 package com.example.danggeunbunny.domain.feed.presentation.dto.response;
 
-import com.example.global.domain.entity.address.Address;
-import com.example.global.domain.entity.address.Location;
+import com.example.danggeunbunny.global.domain.entity.address.Address;
+import com.example.danggeunbunny.global.domain.entity.address.Location;
 import com.example.danggeunbunny.domain.feed.domain.entity.Feed;
 import lombok.Builder;
 import lombok.Getter;
