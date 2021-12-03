@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
 
-    private static final String MEMBER_ID = "MEMBER_ID";
+    private static final String USER_ID = "User_Id";
 
     @SneakyThrows
     @Override
@@ -22,7 +22,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
         if (handler instanceof HandlerMethod) {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
-            Long memberId = (Long) request.getSession().getAttribute(MEMBER_ID);
+            Long memberId = (Long) request.getSession().getAttribute(USER_ID);
 
             if (handlerMethod.hasMethodAnnotation(LoginRequired.class) && memberId == null) {
                 throw new UnAuthenticatedAccessException();

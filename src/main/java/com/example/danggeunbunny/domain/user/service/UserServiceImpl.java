@@ -31,10 +31,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserByEmail(String email) {
-        return userRepository.findUserByEmail(email).orElseThrow(UserNotFoundException::new);
+        return userRepository.findUserByEmail(email)
+                .orElseThrow(UserNotFoundException::new);
     }
 
-    @Override
     public User findUserById(long id) {
         return userRepository.findUserById(id).orElseThrow(UserNotFoundException::new);
     }

@@ -9,20 +9,26 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@Table(name = "MEMBER")
+@Table(name = "Danggeun_User")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
 
     @Id
-    @GeneratedValue
-    @Column(name = "MEMBER_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(columnDefinition = "char(36)", nullable = false, unique = true)
     private String email;
 
+    @Column(columnDefinition = "char(60)", nullable = false)
     private String password;
 
+    @Column(columnDefinition = "string(12)", nullable = false)
     private String nickname;
+
+    @Column(length = 20)
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Embedded
     private Address address;
@@ -32,10 +38,11 @@ public class User {
 
 
     @Builder
-    public User(String email, String password, String nickname) {
+    public User(String email, String password, String nickname, Role role) {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
+        this.role = role;
     }
 
     public void updateProfile(String nickname) {

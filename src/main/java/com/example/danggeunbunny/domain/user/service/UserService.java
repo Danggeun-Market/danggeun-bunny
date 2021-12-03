@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 
      User findUserByEmail(String email);
 
-     boolean isValidUser(UserDto memberDto, PasswordEncoder passwordEncoder);
+     boolean isValidUser(UserDto userDtoDto, PasswordEncoder passwordEncoder);
 
      boolean isValidPassword(User user, PasswordRequestDto passwordRequestDto, PasswordEncoder passwordEncoder);
 
@@ -26,5 +26,7 @@ import org.springframework.stereotype.Service;
      void updateUserPassword(User user, PasswordRequestDto passwordRequestDto, PasswordEncoder passwordEncoder);
 
      void setUserLocationAddress(User user, LocationRequest locationRequestDto);
+
+     void login ()
 
 }

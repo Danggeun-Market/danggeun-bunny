@@ -57,6 +57,12 @@ public class UserControllerTest {
                 .apply(documentationConfiguration(contextProvider))
                 .build();
     }
+    void setup(WebApplicationContext applicationContext, RestDocumentationContextProvider contextProvider) {
+
+        mockMvc = MockMvcBuilders.webAppContextSetup(applicationContext)
+                .apply(documentationConfiguration(contextProvider))
+                .build();
+    }
 
     private String toJsonString(UserDto userDto) throws JsonProcessingException {
         return objectMapper.writeValueAsString(userDto);
