@@ -1,16 +1,17 @@
 package com.example.danggeunbunny.domain.user.presentation;
 
+import com.example.danggeunbunny.domain.login.service.LoginService;
 import com.example.danggeunbunny.domain.user.domain.entity.User;
 import com.example.danggeunbunny.domain.user.presentation.dto.UserDto;
-import com.example.danggeunbunny.global.annotation.login.LoginRequired;
-import com.example.danggeunbunny.global.annotation.login.LoginUser;
-import com.example.danggeunbunny.global.dto.Request.LocationRequest;
 import com.example.danggeunbunny.domain.user.presentation.dto.request.PasswordRequestDto;
 import com.example.danggeunbunny.domain.user.presentation.dto.request.ProfileRequestDto;
 import com.example.danggeunbunny.domain.user.presentation.dto.request.ProfileResponseDto;
-import com.example.danggeunbunny.domain.login.service.LoginService;
 import com.example.danggeunbunny.domain.user.service.UserService;
+import com.example.danggeunbunny.global.annotation.login.LoginRequired;
+import com.example.danggeunbunny.global.annotation.login.LoginUser;
+import com.example.danggeunbunny.global.dto.Request.LocationRequest;
 import com.example.danggeunbunny.global.error.ErrorCode;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ import javax.validation.Valid;
 import static com.example.danggeunbunny.global.error.ErrorCode.*;
 
 @RestController
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Slf4j
 @RequestMapping("/api/users")
 public class UserController {
@@ -31,7 +32,6 @@ public class UserController {
 
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
-    private final LoginService loginService;
 
     /**
      * 사용자 회원가입 경로

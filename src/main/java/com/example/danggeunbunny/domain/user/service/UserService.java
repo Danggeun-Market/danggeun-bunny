@@ -27,4 +27,6 @@ import org.springframework.stereotype.Service;
 
      void setUserLocationAddress(User user, LocationRequest locationRequestDto);
 
+     void login ()
+
 }
